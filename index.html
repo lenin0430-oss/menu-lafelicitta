@@ -438,5 +438,78 @@ function show(id, btn) {
   window.scrollTo({top: 0, behavior: 'smooth'});
 }
 </script>
-</body>
+<script>
+const TELEFONO_NEGOCIO = "56963376893";
+
+function obtenerCarrito() {
+  try {
+    const data = localStorage.getItem("carrito");
+    if (!data) {
+  console.log("No hay carrito guardado");
+  return [];
+};
+    return JSON.parse(data);
+  } catch {
+    return [];
+  }
+}
+
+function calcularTotal(carrito) {
+  return carrito.reduce((acc, item) => {
+    const precio = Number(item.precio || item.price || 0);
+    const cantidad = Number(item.cantidad || item.qty || 1);
+    return acc + (precio * cantidad);
+  }, 0);
+}
+
+function enviarPedidoWhatsApp() {
+  const carrito = obtenerCarrito();
+
+  if (!carrito.length) {
+    alert("⚠️ Agrega productos primero");
+    return;
+  }
+
+  const nombre = document.getElementById("nombre")?.value || "";
+  const telefono = document.getElementById("telefono")?.value || "";
+  const direccion = document.getElementById("direccion")?.value || "";
+  const entrega = document.getElementById("metodoEntrega")?.value || "Delivery";
+  const pago = document.getElementById("metodoPago")?.value || "Efectivo";
+
+  let mensaje = "🍔 *Nuevo pedido - La Felicitta*\n\n";
+
+  mensaje += "👤 Nombre: " + nombre + "\n";
+  mensaje += "📞 Teléfono: " + telefono + "\n";
+  mensaje += "📍 Dirección: " + direccion + "\n";
+  mensaje += "🛵 Entrega: " + entrega + "\n";
+  mensaje += "💳 Pago: " + pago + "\n\n";
+
+  mensaje += "*Pedido:*\n";
+
+  carrito.forEach(item => {
+    const nombreP = item.nombre || item.name;
+    const cant = item.cantidad || item.qty || 1;
+    const precio = item.precio || item.price || 0;
+
+    mensaje += `- ${cant} x ${nombreP} = $${cant * precio}\n`;
+  });
+
+  const total = calcularTotal(carrito);
+
+  mensaje += `\n💰 TOTAL: $${total}\n`;
+  mensaje += "\n📍 Barros Arana 504, Iquique";
+  mensaje += "\n📞 +56 9 63376893";
+
+  const url = `https://wa.me/${TELEFONO_NEGOCIO}?text=${encodeURIComponent(mensaje)}`;
+
+  window.open(url, "_blank");
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const btn = document.getElementById("btn-whatsapp");
+  if (btn) {
+    btn.addEventListener("click", enviarPedidoWhatsApp);
+  }
+});
+</script></body>
 </html>
