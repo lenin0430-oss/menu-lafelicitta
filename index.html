@@ -468,51 +468,24 @@ function show(id, btn) {
 
 <script>
 const TELEFONO_NEGOCIO = "56963376893";
+
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
 function guardarCarrito() {
   localStorage.setItem("carrito", JSON.stringify(carrito));
 }
 
-function mostrarToast(texto) {
-  const toast = document.getElementById("toast");
-  if (!toast) return;
-  toast.textContent = texto;
-  toast.classList.add("show");
-  clearTimeout(window.toastTimer);
-  window.toastTimer = setTimeout(() => {
-    toast.classList.remove("show");
-  }, 1200);
-}
-
-function obtenerNombreProducto(item) {
-  return item.querySelector(".item-name")?.innerText?.trim() || "Producto";
-}
-
-function obtenerPrecioProducto(item) {
-  const precioNormal = item.querySelector(".item-price");
-  if (precioNormal) {
-    const texto = precioNormal.innerText.trim();
-    const numero = parseInt(texto.replace(/\D/g, ""), 10);
-    return Number.isNaN(numero) ? 0 : numero;
-  }
-
-  const pricePill = item.querySelector(".price-pill");
-  if (pricePill) {
-    const texto = pricePill.innerText.trim();
-    const numero = parseInt(texto.replace(/\D/g, ""), 10);
-    return Number.isNaN(numero) ? 0 : numero;
-  }
-
-  return 0;
+function calcularTotal() {
+  return carrito.reduce((acc, item) => acc + (item.precio * item.cantidad), 0);
 }
 
 function agregarProducto(item) {
-  const nombre = obtenerNombreProducto(item);
-  const precio = obtenerPrecioProducto(item);
+  const nombre = item.querySelector(".item-name")?.innerText.trim() || "Producto";
+  const precioTexto = item.querySelector(".item-price")?.innerText || "$0";
+  const precio = parseInt(precioTexto.replace(/\D/g, "")) || 0;
 
   if (!precio) {
-    mostrarToast("Este producto no tiene precio válido");
+    alert("Este producto no tiene precio válido");
     return;
   }
 
@@ -529,11 +502,7 @@ function agregarProducto(item) {
   }
 
   guardarCarrito();
-  mostrarToast("✅ Agregado: " + nombre);
-}
-
-function calcularTotal() {
-  return carrito.reduce((acc, item) => acc + (item.precio * item.cantidad), 0);
+  alert("Agregado: " + nombre);
 }
 
 function enviarCarritoPorWhatsApp() {
@@ -547,34 +516,14 @@ function enviarCarritoPorWhatsApp() {
 
   carrito.forEach(item => {
     const subtotal = item.precio * item.cantidad;
-    mensaje += `• ${item.cantidad} x ${item.nombre} = ${formatearPeso(subtotal)}\n`;
+    mensaje += `• ${item.cantidad} x ${item.nombre} = $${subtotal}\n`;
   });
 
-  mensaje += `\n💰 TOTAL: ${formatearPeso(calcularTotal())}\n\n`;
-  mensaje += `📍 Barros Arana 504, Iquique\n`;
-  mensaje += `📞 +56 9 63376893`;
+  mensaje += "\n💰 TOTAL: $" + calcularTotal() + "\n\n";
+  mensaje += "📍 Barros Arana 504, Iquique\n";
+  mensaje += "📞 +56 9 63376893";
 
-  const url = `https://wa.me/${TELEFONO_NEGOCIO}?text=${encodeURIComponent(mensaje)}`;
-  window.open(url, "_blank");
-}
-  if (!carrito.length) {
-    alert("⚠️ Agrega productos primero");
-    return;
-  }
-
-  let mensaje = "🍔 *Nuevo pedido - La Felicitta*\n\n";
-  mensaje += "*Pedido:*\\n";
-
-  carrito.forEach(item => {
-    const subtotal = item.precio * item.cantidad;
-    mensaje += `- ${item.cantidad} x ${item.nombre} = $${subtotal}\\n`;
-  });
-
-  mensaje += `\\n💰 *TOTAL:* $${calcularTotal()}\\n`;
-  mensaje += "\\n📍 Barros Arana 504, Iquique";
-  mensaje += "\\n📞 +56 9 63376893";
-
-  const url = `https://wa.me/${TELEFONO_NEGOCIO}?text=${encodeURIComponent(mensaje)}`;
+  const url = "https://wa.me/" + TELEFONO_NEGOCIO + "?text=" + encodeURIComponent(mensaje);
   window.open(url, "_blank");
 }
 
