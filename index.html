@@ -510,18 +510,17 @@ function enviarCarritoPorWhatsApp() {
     alert("Agrega productos primero");
     return;
   }
-
-  let mensaje = "🍔 Nuevo pedido - La Felicitta\n\n";
-  mensaje += "🧾 Pedido:\n";
+let mensaje = "Nuevo pedido - La Felicitta\n\n";
+  mensaje += "Pedido:\n";
 
   carrito.forEach(item => {
     const subtotal = item.precio * item.cantidad;
-    mensaje += `• ${item.cantidad} x ${item.nombre} = $${subtotal}\n`;
+    mensaje += "- " + item.cantidad + " x " + item.nombre + " = $" + subtotal + "\n";
   });
 
-  mensaje += "\n💰 TOTAL: $" + calcularTotal() + "\n\n";
-  mensaje += "📍 Barros Arana 504, Iquique\n";
-  mensaje += "📞 +56 9 63376893";
+  mensaje += "\nTOTAL: $" + calcularTotal() + "\n\n";
+  mensaje += "Barros Arana 504, Iquique\n";
+  mensaje += "+56 9 63376893";
 
   const url = "https://wa.me/" + TELEFONO_NEGOCIO + "?text=" + encodeURIComponent(mensaje);
   window.open(url, "_blank");
