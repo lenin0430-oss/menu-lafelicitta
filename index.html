@@ -93,6 +93,17 @@ body{background:#07070f;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',
 .item-ref{opacity:0.65}
 .item-ref .item-price{color:var(--purple);font-size:11px}
 
+/* FORM PEDIDO */
+.order-box{max-width:800px;margin:0 auto 1rem auto;padding:0 1rem 1rem}
+.order-card{background:#111;border:1px solid var(--border);border-radius:8px;padding:15px}
+.order-title{color:#fff;font-size:15px;font-weight:800;margin-bottom:12px;letter-spacing:.3px}
+.order-input,.order-select{
+  width:100%;padding:11px 12px;margin-top:10px;border-radius:6px;border:1px solid var(--border);
+  background:var(--bg3);color:#fff;outline:none
+}
+.order-input::placeholder{color:#9a9ab3}
+.order-help{font-size:11px;color:var(--txt2);margin-top:8px}
+
 /* FOOTER */
 .page-footer{background:var(--bg2);border-top:1px solid var(--border);padding:1.5rem 1rem;text-align:center;margin-top:2rem}
 .footer-brand{font-size:1.4rem;font-weight:900;letter-spacing:5px;color:#fff;text-transform:uppercase}
@@ -108,26 +119,12 @@ body{background:#07070f;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',
 
 /* TOAST */
 .toast{
-  position:fixed;
-  left:50%;
-  bottom:90px;
-  transform:translateX(-50%);
-  background:#111827;
-  color:#fff;
-  border:1px solid #243042;
-  padding:10px 14px;
-  border-radius:8px;
-  font-size:13px;
-  z-index:9999;
-  box-shadow:0 8px 24px rgba(0,0,0,.35);
-  opacity:0;
-  pointer-events:none;
-  transition:opacity .2s ease, transform .2s ease;
+  position:fixed;left:50%;bottom:90px;transform:translateX(-50%);
+  background:#111827;color:#fff;border:1px solid #243042;padding:10px 14px;border-radius:8px;
+  font-size:13px;z-index:9999;box-shadow:0 8px 24px rgba(0,0,0,.35);
+  opacity:0;pointer-events:none;transition:opacity .2s ease, transform .2s ease;
 }
-.toast.show{
-  opacity:1;
-  transform:translateX(-50%) translateY(-4px);
-}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(-4px)}
 </style>
 </head>
 <body>
@@ -435,6 +432,35 @@ body{background:#07070f;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',
   </div>
 </div>
 
+<!-- FORMULARIO DELIVERY / RETIRO -->
+<div class="order-box">
+  <div class="order-card">
+    <div class="order-title">Datos del pedido</div>
+
+    <select id="tipoEntrega" class="order-select">
+      <option value="">Selecciona tipo de pedido</option>
+      <option value="retiro">Retiro en local</option>
+      <option value="delivery">Delivery</option>
+    </select>
+
+    <input id="nombreCliente" class="order-input" placeholder="Nombre del cliente">
+    <input id="telefonoCliente" class="order-input" placeholder="Teléfono del cliente">
+
+    <div id="bloqueDireccion" style="display:none;">
+      <input id="direccionCliente" class="order-input" placeholder="Dirección (solo delivery)">
+      <input id="referenciaCliente" class="order-input" placeholder="Referencia (ej: portón negro, casa azul, etc.)">
+    </div>
+
+    <select id="metodoPago" class="order-select">
+      <option value="">Selecciona método de pago</option>
+      <option value="efectivo">Efectivo</option>
+      <option value="transferencia">Transferencia</option>
+    </select>
+
+    <div class="order-help">Toca los productos para agregarlos al pedido y luego envíalo por WhatsApp.</div>
+  </div>
+</div>
+
 <!-- FOOTER -->
 <div class="page-footer">
   <div class="footer-brand">La <span class="footer-accent">Felicitta</span></div>
@@ -468,24 +494,51 @@ function show(id, btn) {
 
 <script>
 const TELEFONO_NEGOCIO = "56963376893";
-
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
 function guardarCarrito() {
   localStorage.setItem("carrito", JSON.stringify(carrito));
 }
 
-function calcularTotal() {
-  return carrito.reduce((acc, item) => acc + (item.precio * item.cantidad), 0);
+function mostrarToast(texto) {
+  const toast = document.getElementById("toast");
+  if (!toast) return;
+  toast.textContent = texto;
+  toast.classList.add("show");
+  clearTimeout(window.toastTimer);
+  window.toastTimer = setTimeout(() => {
+    toast.classList.remove("show");
+  }, 1200);
+}
+
+function obtenerNombreProducto(item) {
+  return item.querySelector(".item-name")?.innerText?.trim() || "Producto";
+}
+
+function obtenerPrecioProducto(item) {
+  const precioNormal = item.querySelector(".item-price");
+  if (precioNormal) {
+    const texto = precioNormal.innerText.trim();
+    const numero = parseInt(texto.replace(/\D/g, ""), 10);
+    return Number.isNaN(numero) ? 0 : numero;
+  }
+
+  const pricePill = item.querySelector(".price-pill");
+  if (pricePill) {
+    const texto = pricePill.innerText.trim();
+    const numero = parseInt(texto.replace(/\D/g, ""), 10);
+    return Number.isNaN(numero) ? 0 : numero;
+  }
+
+  return 0;
 }
 
 function agregarProducto(item) {
-  const nombre = item.querySelector(".item-name")?.innerText.trim() || "Producto";
-  const precioTexto = item.querySelector(".item-price")?.innerText || "$0";
-  const precio = parseInt(precioTexto.replace(/\D/g, "")) || 0;
+  const nombre = obtenerNombreProducto(item);
+  const precio = obtenerPrecioProducto(item);
 
   if (!precio) {
-    alert("Este producto no tiene precio válido");
+    mostrarToast("Producto sin precio");
     return;
   }
 
@@ -502,28 +555,62 @@ function agregarProducto(item) {
   }
 
   guardarCarrito();
-  alert("Agregado: " + nombre);
+  mostrarToast("Agregado: " + nombre);
+}
+
+function calcularTotal() {
+  return carrito.reduce((acc, item) => acc + (item.precio * item.cantidad), 0);
 }
 
 function enviarCarritoPorWhatsApp() {
-
   if (!carrito.length) {
     alert("Agrega productos primero");
     return;
   }
 
-  // DATOS CLIENTE
-  const tipo = document.getElementById("tipoEntrega")?.value || "retiro";
-  const nombre = document.getElementById("nombreCliente")?.value || "Sin nombre";
-  const direccion = document.getElementById("direccionCliente")?.value || "";
+  const tipo = document.getElementById("tipoEntrega")?.value || "";
+  const nombre = document.getElementById("nombreCliente")?.value.trim() || "";
+  const telefono = document.getElementById("telefonoCliente")?.value.trim() || "";
+  const direccion = document.getElementById("direccionCliente")?.value.trim() || "";
+  const referencia = document.getElementById("referenciaCliente")?.value.trim() || "";
+  const metodoPago = document.getElementById("metodoPago")?.value || "";
+
+  if (!tipo) {
+    alert("Selecciona tipo de pedido");
+    return;
+  }
+
+  if (!nombre) {
+    alert("Ingresa el nombre del cliente");
+    return;
+  }
+
+  if (!telefono) {
+    alert("Ingresa el teléfono del cliente");
+    return;
+  }
+
+  if (tipo === "delivery" && !direccion) {
+    alert("Ingresa la dirección para delivery");
+    return;
+  }
+
+  if (!metodoPago) {
+    alert("Selecciona método de pago");
+    return;
+  }
 
   let mensaje = "Nuevo pedido - La Felicitta\n\n";
-
-  mensaje += "Tipo: " + (tipo === "delivery" ? "DELIVERY 🚚" : "RETIRO EN LOCAL 🏪") + "\n";
+  mensaje += "Tipo: " + (tipo === "delivery" ? "DELIVERY" : "RETIRO EN LOCAL") + "\n";
   mensaje += "Cliente: " + nombre + "\n";
+  mensaje += "Telefono: " + telefono + "\n";
+  mensaje += "Pago: " + (metodoPago === "transferencia" ? "TRANSFERENCIA" : "EFECTIVO") + "\n";
 
   if (tipo === "delivery") {
-    mensaje += "Direccion: " + (direccion || "No especificada") + "\n";
+    mensaje += "Direccion: " + direccion + "\n";
+    if (referencia) {
+      mensaje += "Referencia: " + referencia + "\n";
+    }
   }
 
   mensaje += "\nPedido:\n";
@@ -535,11 +622,23 @@ function enviarCarritoPorWhatsApp() {
 
   mensaje += "\nTOTAL: $" + calcularTotal() + "\n\n";
 
+  if (metodoPago === "transferencia") {
+    mensaje += "Datos para transferencia:\n";
+    mensaje += "Banco / Medio: Mercado Pago\n";
+    mensaje += "Tipo de cuenta: Cuenta Vista\n";
+    mensaje += "Numero de cuenta: 1059389577\n";
+    mensaje += "Correo: ventas@lafelicittacl.com\n";
+    mensaje += "RUT: 267162433\n\n";
+    mensaje += "🔥 Tu pedido ya está en proceso en La Felicitta\n";
+    mensaje += "Para dejarlo confirmado y avanzar más rápido en cocina, solo te falta enviar el comprobante de la transferencia por este medio.\n";
+    mensaje += "Así aseguramos tu pedido sin demoras y lo preparamos al tiro.\n";
+    mensaje += "¡Gracias por preferir La Felicitta!\n\n";
+  }
+
   mensaje += "Barros Arana 504, Iquique\n";
   mensaje += "+56 9 63376893";
 
   const url = "https://wa.me/" + TELEFONO_NEGOCIO + "?text=" + encodeURIComponent(mensaje);
-
   window.open(url, "_blank");
 }
 
@@ -554,22 +653,21 @@ document.addEventListener("DOMContentLoaded", () => {
       enviarCarritoPorWhatsApp();
     });
   });
+
+  const tipoEntrega = document.getElementById("tipoEntrega");
+  const bloqueDireccion = document.getElementById("bloqueDireccion");
+
+  if (tipoEntrega && bloqueDireccion) {
+    tipoEntrega.addEventListener("change", () => {
+      if (tipoEntrega.value === "delivery") {
+        bloqueDireccion.style.display = "block";
+      } else {
+        bloqueDireccion.style.display = "none";
+      }
+    });
+  }
 });
 </script>
-<!-- FORMULARIO DELIVERY / RETIRO -->
-<div style="padding:15px;background:#111;margin:15px;border-radius:8px;">
-  <h3 style="color:#fff;">Tipo de pedido</h3>
 
-  <select id="tipoEntrega" style="width:100%;padding:10px;margin-top:10px;">
-    <option value="retiro">Retiro en local</option>
-    <option value="delivery">Delivery</option>
-  </select>
-
-  <input id="nombreCliente" placeholder="Nombre del cliente"
-    style="width:100%;padding:10px;margin-top:10px;" />
-
-  <input id="direccionCliente" placeholder="Dirección (solo delivery)"
-    style="width:100%;padding:10px;margin-top:10px;" />
-</div>
 </body>
 </html>
