@@ -1,207 +1,442 @@
-<section class="checkout-box">
-  <h3>Finalizar pedido</h3>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="theme-color" content="#07070f">
+<title>Menú — La Felicitta | Iquique</title>
+<meta name="description" content="Menú digital de La Felicitta. Comida venezolana y chilena en Iquique. Delivery Express. Barros Arana 504.">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{background:#07070f;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#e8e8f0;min-height:100vh;overflow-x:hidden}
+:root{
+  --bg:#07070f;--bg2:#0e0e1c;--bg3:#13131f;
+  --cyan:#00e5ff;--pink:#ff2d78;--yellow:#f5e642;
+  --green:#39e97b;--purple:#b44fff;--orange:#ff6b2b;
+  --txt:#e8e8f0;--txt2:#8888aa;--border:#1e1e36;
+}
 
-  <div class="checkout-grid">
-    <input type="text" id="nombre" placeholder="Tu nombre" />
-    <input type="text" id="telefono" placeholder="Tu teléfono" />
-    <input type="text" id="direccion" placeholder="Tu dirección" />
+/* HEADER */
+.header{background:#0a0a18;text-align:center;padding:1.6rem 1rem 1.1rem;border-bottom:1px solid var(--border);position:relative}
+.header::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--cyan) 30%,var(--pink) 70%,transparent)}
+.brand{font-size:clamp(1.8rem,7vw,2.6rem);font-weight:900;letter-spacing:clamp(3px,2vw,8px);color:#fff;text-transform:uppercase;line-height:1}
+.brand-accent{color:var(--cyan)}
+.brand-tagline{font-size:10px;letter-spacing:4px;color:var(--txt2);text-transform:uppercase;margin:3px 0 8px}
+.badge-delivery{display:inline-block;border:1px solid var(--pink);color:var(--pink);font-size:9px;font-weight:700;letter-spacing:3px;padding:3px 12px;text-transform:uppercase;border-radius:2px}
 
-    <select id="metodoEntrega">
-      <option value="Delivery">Delivery</option>
-      <option value="Retiro en local">Retiro en local</option>
-    </select>
+/* INFO BAR */
+.info-bar{background:#080814;display:flex;justify-content:center;gap:1rem;padding:0.5rem 0.8rem;flex-wrap:wrap;border-bottom:1px solid var(--border)}
+.info-item{font-size:10px;color:var(--txt2);letter-spacing:0.5px;display:flex;align-items:center;gap:4px}
+.info-item a{color:var(--cyan);text-decoration:none}
 
-    <select id="metodoPago">
-      <option value="Efectivo">Efectivo</option>
-      <option value="Transferencia">Transferencia</option>
-    </select>
+/* NAV */
+.nav-wrap{position:sticky;top:0;z-index:100;background:#0a0a18;border-bottom:1px solid var(--border)}
+.nav{display:flex;overflow-x:auto;gap:3px;padding:0.5rem;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav-btn{background:transparent;border:1px solid #1e1e36;color:var(--txt2);font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:7px 11px;cursor:pointer;white-space:nowrap;border-radius:2px;transition:all 0.15s;flex-shrink:0;font-family:inherit;line-height:1}
+.nav-btn:active,.nav-btn.active{background:var(--cyan);border-color:var(--cyan);color:#000}
+
+/* SECTIONS */
+.section{display:none;padding:1rem;max-width:800px;margin:0 auto}
+.section.active{display:block}
+
+/* CATEGORY HEADER */
+.cat-header{display:flex;align-items:center;gap:10px;margin-bottom:1rem}
+.cat-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.cat-title{font-size:clamp(1rem,4vw,1.2rem);font-weight:900;text-transform:uppercase;letter-spacing:3px;line-height:1}
+.cat-rule{flex:1;height:1px;background:var(--border)}
+.cat-count{font-size:9px;color:var(--txt2);letter-spacing:1px;white-space:nowrap}
+
+.sub-title{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--txt2);margin:1rem 0 0.5rem;padding-left:4px;border-left:2px solid var(--border)}
+.alert-bar{border-radius:3px;padding:8px 12px;margin-bottom:10px;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700}
+
+/* GRIDS */
+.items-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.items-single{display:flex;flex-direction:column;gap:7px}
+.items-col{display:flex;flex-direction:column;gap:7px}
+@media(max-width:480px){.items-grid{grid-template-columns:1fr}}
+
+/* ITEM */
+.item{background:var(--bg2);border:1px solid var(--border);border-radius:3px;padding:9px 11px;position:relative;transition:border-color 0.1s}
+.item-tag{position:absolute;top:-1px;right:8px;font-size:8px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:2px 6px;border-radius:0 0 3px 3px}
+.item-head{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:3px}
+.item-name{font-size:12px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:0.5px;line-height:1.3}
+.item-price{font-size:13px;font-weight:900;color:var(--yellow);white-space:nowrap}
+.item-desc{font-size:10px;color:var(--txt2);line-height:1.5}
+.price-row{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px}
+.price-pill{background:var(--bg3);border:1px solid #2a2a46;border-radius:2px;padding:3px 7px;font-size:10px;color:var(--yellow);font-weight:700}
+.price-label{font-size:9px;color:var(--txt2);font-weight:400;margin-right:2px}
+.item-promo{background:#150e1a;border-color:#3d1a4a}
+.accent-cyan{border-left:3px solid var(--cyan)}
+.accent-pink{border-left:3px solid var(--pink)}
+.accent-yellow{border-left:3px solid var(--yellow)}
+.accent-green{border-left:3px solid var(--green)}
+.accent-purple{border-left:3px solid var(--purple)}
+.accent-orange{border-left:3px solid var(--orange)}
+
+/* AREPA */
+.arepa-hero{background:var(--bg2);border:1px solid var(--border);border-top:3px solid var(--yellow);border-radius:3px;padding:1.2rem;margin-bottom:10px;text-align:center}
+.arepa-price-big{font-size:3rem;font-weight:900;color:var(--yellow);line-height:1}
+.arepa-sub{font-size:11px;color:var(--txt2);letter-spacing:2px;text-transform:uppercase;margin:4px 0 1rem}
+.ing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;text-align:left}
+@media(max-width:360px){.ing-grid{grid-template-columns:repeat(2,1fr)}}
+.ing-tag{background:var(--bg3);border:1px solid var(--border);border-radius:2px;padding:5px 7px;font-size:10px;color:var(--txt2)}
+
+/* DRINKS */
+.drink-cat{margin-bottom:1.2rem}
+.drink-cat-label{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.drink-icon{font-size:15px}
+.drink-cat-name{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--cyan)}
+.ref-badge{display:inline-block;background:#1a1426;border:1px solid var(--purple);color:var(--purple);font-size:8px;font-weight:700;letter-spacing:2px;padding:2px 6px;border-radius:2px;text-transform:uppercase;margin-left:6px;vertical-align:middle}
+.item-ref{opacity:0.65}
+.item-ref .item-price{color:var(--purple);font-size:11px}
+
+/* FOOTER */
+.page-footer{background:var(--bg2);border-top:1px solid var(--border);padding:1.5rem 1rem;text-align:center;margin-top:2rem}
+.footer-brand{font-size:1.4rem;font-weight:900;letter-spacing:5px;color:#fff;text-transform:uppercase}
+.footer-accent{color:var(--cyan)}
+.footer-info{font-size:10px;color:var(--txt2);letter-spacing:1px;margin:8px 0}
+.footer-social{display:flex;justify-content:center;gap:12px;margin-top:10px;flex-wrap:wrap}
+.social-btn{background:var(--bg3);border:1px solid var(--border);color:var(--txt2);font-size:10px;font-weight:700;letter-spacing:1.5px;padding:6px 14px;border-radius:2px;text-decoration:none;text-transform:uppercase}
+.footer-divider{height:1px;background:var(--border);margin:12px 0}
+.footer-bottom{font-size:9px;color:#444466;letter-spacing:1px}
+
+/* WHATSAPP FLOAT */
+.wa-btn{position:fixed;bottom:1.2rem;right:1.2rem;background:#25d366;color:#fff;border-radius:50%;width:52px;height:52px;display:flex;align-items:center;justify-content:center;font-size:24px;text-decoration:none;z-index:200;border:2px solid #1da851}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="brand-tagline">Sabor venezolano en Chile</div>
+  <div class="brand">La <span class="brand-accent">Felicitta</span></div>
+  <div style="margin-top:7px"><span class="badge-delivery">⚡ Delivery Express</span></div>
+</div>
+
+<div class="info-bar">
+  <span class="info-item">📍 Barros Arana 504, Iquique</span>
+  <span class="info-item">📞 <a href="tel:+56963376893">+56 9 63376893</a></span>
+  <span class="info-item">🕗 08:30 – 00:00 todos los días</span>
+</div>
+
+<div class="nav-wrap">
+  <div class="nav">
+    <button class="nav-btn active" onclick="show('burgers',this)">🍔 Burgers</button>
+    <button class="nav-btn" onclick="show('perros',this)">🌭 Perros</button>
+    <button class="nav-btn" onclick="show('completos',this)">🥖 Completos</button>
+    <button class="nav-btn" onclick="show('arepas',this)">🫓 Arepas</button>
+    <button class="nav-btn" onclick="show('cachapas',this)">🌽 Cachapas</button>
+    <button class="nav-btn" onclick="show('arroz',this)">🍚 Arroz Chino</button>
+    <button class="nav-btn" onclick="show('pepitos',this)">🥙 Pepitos</button>
+    <button class="nav-btn" onclick="show('patacones',this)">🫔 Patacones</button>
+    <button class="nav-btn" onclick="show('papas',this)">🍟 Papas</button>
+    <button class="nav-btn" onclick="show('empanadas',this)">🥟 Empanadas</button>
+    <button class="nav-btn" onclick="show('tequenos',this)">🧀 Tequeños</button>
+    <button class="nav-btn" onclick="show('bebidas',this)">🥤 Bebidas</button>
+  </div>
+</div>
+
+<!-- BURGERS -->
+<div class="section active" id="burgers">
+  <div class="cat-header"><div class="cat-dot" style="background:var(--cyan)"></div><div class="cat-title" style="color:var(--cyan)">Hamburguesas</div><div class="cat-rule"></div><div class="cat-count">7 opciones</div></div>
+  <div class="sub-title">Clásicas — Pan Brioche</div>
+  <div class="items-grid">
+    <div class="items-col">
+      <div class="item accent-cyan"><div class="item-head"><span class="item-name">La Feliccita</span><span class="item-price">$2.500</span></div><div class="item-desc">Pan brioche, carne de la casa, papas hilo, tomate, lechuga, ketchup, mostaza, mayo</div></div>
+      <div class="item accent-cyan"><div class="item-head"><span class="item-name">Especial de Carne</span><span class="item-price">$4.500</span></div><div class="item-desc">Carne, queso gouda, huevo, papas hilo, cebolla, tomate, lechuga + salsa de la casa</div></div>
+      <div class="item accent-cyan"><div class="item-head"><span class="item-name">Super de Carne</span><span class="item-price">$5.500</span></div><div class="item-desc">Proteína de la casa, huevo, queso gouda, cebolla morada, lechuga, tomate, tocino, mayo, ketchup, mostaza, salsa casa + papas hilo</div></div>
+    </div>
+    <div class="items-col">
+      <div class="item accent-cyan"><div class="item-head"><span class="item-name">Doble</span><span class="item-price">$6.500</span></div><div class="item-desc">Doble proteína, doble queso cheddar, cebolla morada, pepinillo, tocino, ketchup, mostaza</div></div>
+      <div class="item accent-cyan"><div class="item-head"><span class="item-name">La Pelua</span><span class="item-price">$7.500</span></div><div class="item-desc">Carne mechada, huevo, tocino ahumado, lechuga, tomate, cebolla morada, queso gouda, papas hilo</div></div>
+      <div class="item accent-cyan"><div class="item-head"><span class="item-name">Triple</span><span class="item-price">$8.000</span></div><div class="item-desc">Triple proteína, tocino ahumado, lechuga, tomate, cebolla morada, queso cheddar, papas hilo</div></div>
+    </div>
+  </div>
+  <div class="sub-title">XL — 200g de carne + papas fritas incluidas</div>
+  <div class="items-grid">
+    <div class="items-col">
+      <div class="item accent-pink"><div class="item-tag" style="background:var(--pink);color:#fff">XL</div><div class="item-head"><span class="item-name">La Estrella XL</span><span class="item-price">$6.500</span></div><div class="item-desc">200g carne, lechuga, tomate, cebolla + salsas</div></div>
+      <div class="item accent-pink"><div class="item-tag" style="background:var(--pink);color:#fff">XL</div><div class="item-head"><span class="item-name">La Luna XL</span><span class="item-price">$7.500</span></div><div class="item-desc">200g carne, tocineta, huevo, queso gouda, lechuga, tomate, cebolla morada</div></div>
+    </div>
+    <div class="items-col">
+      <div class="item accent-pink"><div class="item-tag" style="background:var(--pink);color:#fff">XL</div><div class="item-head"><span class="item-name">La Casa Club XL</span><span class="item-price">$8.500</span></div><div class="item-desc">200g carne, salsa de la casa, cebolla caramelizada, tomate, lechuga, tocino, queso cheddar</div></div>
+      <div class="item accent-pink"><div class="item-tag" style="background:var(--pink);color:#fff">XL</div><div class="item-head"><span class="item-name">La Ahumada XL</span><span class="item-price">$9.500</span></div><div class="item-desc">200g carne, salsa bacon, cebolla grillada, tocino, queso cheddar, mostaza dulce</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- PERROS -->
+<div class="section" id="perros">
+  <div class="cat-header"><div class="cat-dot" style="background:var(--orange)"></div><div class="cat-title" style="color:var(--orange)">Perros Calientes</div><div class="cat-rule"></div><div class="cat-count">10 opciones</div></div>
+  <div class="sub-title">Hotdog Clásicos</div>
+  <div class="items-grid">
+    <div class="items-col">
+      <div class="item accent-orange"><div class="item-head"><span class="item-name">El de Luka ⭐⭐⭐</span><span class="item-price">$1.000</span></div><div class="item-desc">Pan 15cm, salchicha, repollo c/cilantro, papas hilo, ketchup, mayo, mostaza</div></div>
+      <div class="item accent-orange"><div class="item-head"><span class="item-name">El Callejero</span><span class="item-price">$2.000</span></div><div class="item-desc">Pan 20cm, salchicha, repollo c/cilantro, papas hilo, queso gouda, ketchup, mayo-ajo, mostaza</div></div>
+      <div class="item accent-orange"><div class="item-head"><span class="item-name">El Perro Loco</span><span class="item-price">$3.000</span></div><div class="item-desc">Pan 22cm, salchicha, repollo, maíz, tocineta, papas hilo, queso gouda, ketchup, mayo-ajo</div></div>
+    </div>
+    <div class="items-col">
+      <div class="item accent-orange"><div class="item-head"><span class="item-name">El Chileno</span><span class="item-price">$3.000</span></div><div class="item-desc">Pan 22cm, repollo c/cilantro, tomate, aguacate, papas hilo, queso gouda</div></div>
+      <div class="item accent-orange"><div class="item-head"><span class="item-name">El Americano</span><span class="item-price">$3.000</span></div><div class="item-desc">Pan 22cm, repollo, tocineta en trozos, queso cheddar derretido, papas hilo</div></div>
+      <div class="item accent-orange"><div class="item-head"><span class="item-name">El Peluo</span><span class="item-price">$3.500</span></div><div class="item-desc">Pan 22cm, carne mechada casera, repollo c/cilantro, tomate, papas hilo, queso gouda</div></div>
+    </div>
+  </div>
+  <div class="sub-title">Premium — Salchicha XL Polaca / Frankfurt</div>
+  <div class="items-grid">
+    <div class="items-col">
+      <div class="item accent-pink"><div class="item-tag" style="background:var(--pink);color:#fff">PREMIUM</div><div class="item-head"><span class="item-name">El Venezolano</span><span class="item-price">$3.500</span></div><div class="item-desc">Salchicha XL polaca, repollo c/cilantro, papitas hilo, cebolla cruda, queso blanco rallado, tocineta crocante</div></div>
+      <div class="item accent-pink"><div class="item-tag" style="background:var(--pink);color:#fff">PREMIUM</div><div class="item-head"><span class="item-name">El Chileno Premium</span><span class="item-price">$3.500</span></div><div class="item-desc">Salchicha XL frankfurt, tomate en cubos, palta en crema, mayo de la casa</div></div>
+    </div>
+    <div class="items-col">
+      <div class="item accent-pink"><div class="item-tag" style="background:var(--pink);color:#fff">PREMIUM</div><div class="item-head"><span class="item-name">El Americano Premium</span><span class="item-price">$3.990</span></div><div class="item-desc">Salchicha XL polaca, tocino crujiente, queso cheddar, cebolla caramelizada, mayo</div></div>
+      <div class="item accent-pink"><div class="item-tag" style="background:var(--pink);color:#fff">PREMIUM</div><div class="item-head"><span class="item-name">BBQ Premium</span><span class="item-price">$3.990</span></div><div class="item-desc">Salchicha frankfurt, queso gouda rallado, cebolla frita crujiente, salsa barbecue</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- COMPLETOS -->
+<div class="section" id="completos">
+  <div class="cat-header"><div class="cat-dot" style="background:var(--yellow)"></div><div class="cat-title" style="color:var(--yellow)">Completos y Sándwichs</div><div class="cat-rule"></div></div>
+  <div class="alert-bar" style="background:var(--bg2);border:1px solid var(--border);border-left:3px solid var(--yellow);color:var(--yellow)">⚡ Todos los sándwichs incluyen papas fritas gratis</div>
+  <div class="sub-title">Completos</div>
+  <div class="items-grid">
+    <div class="item accent-yellow"><div class="item-head"><span class="item-name">As</span></div><div class="price-row"><span class="price-pill"><span class="price-label">Normal</span>$3.000</span><span class="price-pill"><span class="price-label">XL</span>$5.500</span></div></div>
+    <div class="item accent-yellow"><div class="item-head"><span class="item-name">Italiano</span></div><div class="price-row"><span class="price-pill"><span class="price-label">Normal</span>$2.000</span><span class="price-pill"><span class="price-label">XL</span>$3.500</span></div></div>
+  </div>
+  <div class="sub-title">Churrascos y Sándwichs</div>
+  <div class="items-grid">
+    <div class="items-col">
+      <div class="item accent-yellow"><div class="item-head"><span class="item-name">Churrasco Italiano</span><span class="item-price">$4.500</span></div><div class="item-desc">Carne, tomate, palta, mayo casera</div></div>
+      <div class="item accent-yellow"><div class="item-head"><span class="item-name">Churrasco Super</span><span class="item-price">$5.000</span></div><div class="item-desc">Carne, tomate, palta, lechuga, queso, mayo casera</div></div>
+      <div class="item accent-yellow"><div class="item-head"><span class="item-name">Barros Luco</span><span class="item-price">$4.500</span></div><div class="item-desc">Carne y queso</div></div>
+    </div>
+    <div class="items-col">
+      <div class="item accent-yellow"><div class="item-head"><span class="item-name">Churrasco Mechada</span><span class="item-price">$5.000</span></div><div class="item-desc">Carne mechada, tomate, palta, mayo, queso</div></div>
+      <div class="item accent-yellow"><div class="item-head"><span class="item-name">Chacarero</span><span class="item-price">$5.000</span></div><div class="item-desc">Mayo, carne, tomate, poroto verde, ají verde</div></div>
+      <div class="item accent-yellow"><div class="item-head"><span class="item-name">Pan de Molde</span></div><div class="price-row"><span class="price-pill"><span class="price-label">Jamón queso</span>$2.000</span><span class="price-pill"><span class="price-label">Completo</span>$3.000</span></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- AREPAS -->
+<div class="section" id="arepas">
+  <div class="cat-header"><div class="cat-dot" style="background:var(--yellow)"></div><div class="cat-title" style="color:var(--yellow)">Arepas Venezolanas</div><div class="cat-rule"></div></div>
+  <div class="arepa-hero">
+    <div class="arepa-price-big">$2.500</div>
+    <div class="arepa-sub">Arma tu arepa con 5 ingredientes a tu gusto</div>
+    <div style="font-size:9px;color:var(--txt2);letter-spacing:3px;text-transform:uppercase;margin-bottom:10px">Ingredientes disponibles</div>
+    <div class="ing-grid">
+      <div class="ing-tag">Carne mechada</div><div class="ing-tag">Pollo mechado</div><div class="ing-tag">Salchicha</div>
+      <div class="ing-tag">Jamón pierna</div><div class="ing-tag">Pernil</div><div class="ing-tag">Perico</div>
+      <div class="ing-tag">Carne molida</div><div class="ing-tag">Ens. gallina</div><div class="ing-tag">Caraotas negras</div>
+      <div class="ing-tag">Queso Gouda</div><div class="ing-tag">Reina pepida</div><div class="ing-tag">Huevo frito</div>
+      <div class="ing-tag">Mariscos</div><div class="ing-tag">Tajadas</div><div class="ing-tag">Choclo (maíz)</div>
+      <div class="ing-tag">Queso llanero</div><div class="ing-tag">Huevo duro</div>
+    </div>
+  </div>
+</div>
+
+<!-- CACHAPAS -->
+<div class="section" id="cachapas">
+  <div class="cat-header"><div class="cat-dot" style="background:var(--green)"></div><div class="cat-title" style="color:var(--green)">Cachapas 100% Maíz</div><div class="cat-rule"></div></div>
+  <div class="sub-title">Con Queso Llanero</div>
+  <div class="items-grid">
+    <div class="items-col">
+      <div class="item accent-green"><div class="item-head"><span class="item-name">Sencilla</span><span class="item-price">$5.000</span></div><div class="item-desc">Queso rallado, mantequilla, natilla</div></div>
+      <div class="item accent-green"><div class="item-head"><span class="item-name">Cachapa Especial</span><span class="item-price">$6.000</span></div><div class="item-desc">Queso rallado, jamón ahumado, mantequilla</div></div>
+    </div>
+    <div class="items-col">
+      <div class="item accent-green"><div class="item-head"><span class="item-name">Cachapa Ahumada</span><span class="item-price">$7.000</span></div><div class="item-desc">Chuleta ahumada, queso rallado, mantequilla, natilla</div></div>
+      <div class="item accent-green"><div class="item-head"><span class="item-name">Cochino Frito</span><span class="item-price">$7.500</span></div><div class="item-desc">250gr pulpa de cochino, queso rallado, natilla</div></div>
+    </div>
+  </div>
+  <div class="sub-title">Con Queso de Mano</div>
+  <div class="items-grid">
+    <div class="items-col">
+      <div class="item accent-cyan"><div class="item-head"><span class="item-name">Queso de Mano</span><span class="item-price">$7.000</span></div><div class="item-desc">½kg queso de mano, mantequilla, natilla</div></div>
+      <div class="item accent-cyan"><div class="item-head"><span class="item-name">Especial Queso Mano</span><span class="item-price">$7.500</span></div><div class="item-desc">Queso de mano, jamón ahumado, mantequilla, natilla</div></div>
+    </div>
+    <div class="items-col">
+      <div class="item accent-cyan"><div class="item-head"><span class="item-name">Chuleta Queso</span><span class="item-price">$9.000</span></div><div class="item-desc">½kg queso de mano, chuleta ahumada, mantequilla, natilla</div></div>
+      <div class="item accent-cyan"><div class="item-head"><span class="item-name">Cachapa Cochino</span><span class="item-price">$10.000</span></div><div class="item-desc">½kg queso de mano, pulpa de cochino, mantequilla, natilla</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ARROZ -->
+<div class="section" id="arroz">
+  <div class="cat-header"><div class="cat-dot" style="background:var(--purple)"></div><div class="cat-title" style="color:var(--purple)">Arroz Chino Venezolano</div><div class="cat-rule"></div></div>
+  <div class="items-single">
+    <div class="item item-promo accent-pink"><div class="item-tag" style="background:var(--pink);color:#fff">PROMO</div><div class="item-head"><span class="item-name">Arroz Salteado Promo</span><span class="item-price" style="color:var(--pink)">$4.500</span></div><div class="item-desc">Arroz salteado con salsa de soya, pollo, jamón, diente de dragón y cebollín</div></div>
+    <div class="item accent-purple"><div class="item-head"><span class="item-name">Arroz Especial Cerdo – Pollo</span><span class="item-price">$8.000</span></div><div class="item-desc">Arroz salteado, salsa de soya, pollo, cerdo, diente de dragón, huevo y cebollín</div></div>
+    <div class="item accent-purple"><div class="item-head"><span class="item-name">Arroz Especial Cerdo – Camarón</span><span class="item-price">$10.000</span></div><div class="item-desc">Arroz salteado, salsa de soya, camarón, cerdo, diente de dragón, huevo y cebollín</div></div>
+    <div class="item accent-purple"><div class="item-head"><span class="item-name">Arroz Especial La Felicitta</span><span class="item-price">$12.000</span></div><div class="item-desc">Arroz salteado, salsa de soya, jamón, pollo, cerdo, camarón, diente de dragón, huevo y cebollín</div></div>
+  </div>
+</div>
+
+<!-- PEPITOS -->
+<div class="section" id="pepitos">
+  <div class="cat-header"><div class="cat-dot" style="background:var(--orange)"></div><div class="cat-title" style="color:var(--orange)">Pepitos</div><div class="cat-rule"></div></div>
+  <div class="alert-bar" style="background:var(--bg2);border:1px solid var(--border);border-left:3px solid var(--orange);color:var(--orange)">Pan de orégano parmesano · Todos incluyen papas hilo</div>
+  <div class="items-single">
+    <div class="item accent-orange"><div class="item-head"><span class="item-name">Pepito de Pollo 15cm</span><span class="item-price">$6.000</span></div><div class="item-desc">200gr pollo a la plancha, huevo, tocineta, queso gouda, lechuga, tomate, cebolla caramelizada, ketchup, salsa</div></div>
+    <div class="item accent-orange"><div class="item-head"><span class="item-name">Pepito de Carne 15cm</span><span class="item-price">$7.000</span></div><div class="item-desc">200gr carne a la plancha, huevo, tocineta, queso gouda, lechuga, tomate, cebolla caramelizada, ketchup, salsa</div></div>
+    <div class="item accent-orange"><div class="item-head"><span class="item-name">Pepito Mixto 15cm</span><span class="item-price">$9.000</span></div><div class="item-desc">100gr pollo + 100gr carne + 100gr chorizo, huevo, tocineta, queso gouda, lechuga, tomate, cebolla caramelizada</div></div>
+    <div class="item accent-pink"><div class="item-tag" style="background:var(--pink);color:#fff">BESTIA</div><div class="item-head"><span class="item-name">Pepito Mixto 30cm</span><span class="item-price">$14.990</span></div><div class="item-desc">100gr carne + 100gr pollo + 100gr chorizo + 100gr chuleta ahumada, huevo, tocineta, queso gouda, lechuga, tomate, cebolla caramelizada</div></div>
+  </div>
+</div>
+
+<!-- PATACONES -->
+<div class="section" id="patacones">
+  <div class="cat-header"><div class="cat-dot" style="background:var(--green)"></div><div class="cat-title" style="color:var(--green)">Patacones</div><div class="cat-rule"></div></div>
+  <div class="items-single">
+    <div class="item accent-green"><div class="item-head"><span class="item-name">Normal</span><span class="item-price">$7.000</span></div><div class="item-desc">Carne mechada o pollo mechado, queso rallado, ensalada rallada, tomate, lechuga, cebolla, salsas a gusto</div></div>
+    <div class="item accent-green"><div class="item-head"><span class="item-name">Especial</span><span class="item-price">$8.500</span></div><div class="item-desc">Carne mechada o pollo mechado, jamón, tocineta, queso gauda, ensalada rallada, tomate, lechuga, cebolla, salsas</div></div>
+    <div class="item accent-green"><div class="item-head"><span class="item-name">3 Quesos</span><span class="item-price">$11.000</span></div><div class="item-desc">Carne mechada o pollo mechado, queso gauda + queso rallado + queso de mano, tomate, lechuga, salsas</div></div>
+    <div class="item accent-cyan"><div class="item-tag" style="background:var(--cyan);color:#000">TOP</div><div class="item-head"><span class="item-name">Mixto</span><span class="item-price">$12.000</span></div><div class="item-desc">Carne mechada y pollo mechado, jamón, tocineta, queso gauda, ensalada rallada, tomate, lechuga, cebolla, salsas</div></div>
+  </div>
+</div>
+
+<!-- PAPAS -->
+<div class="section" id="papas">
+  <div class="cat-header"><div class="cat-dot" style="background:var(--yellow)"></div><div class="cat-title" style="color:var(--yellow)">Papas y Acompañamientos</div><div class="cat-rule"></div></div>
+  <div class="items-grid">
+    <div class="items-col">
+      <div class="sub-title" style="margin-top:0">Papas Fritas</div>
+      <div class="item accent-yellow"><div class="item-head"><span class="item-name">Normal + Ketchup</span><span class="item-price">$3.500</span></div></div>
+      <div class="item accent-yellow"><div class="item-head"><span class="item-name">XL + Ketchup</span><span class="item-price">$5.500</span></div></div>
+      <div class="item accent-yellow"><div class="item-head"><span class="item-name">Bacon & Cheddar</span><span class="item-price">$4.500</span></div><div class="item-desc">Tocino ahumado y queso cheddar</div></div>
+      <div class="item accent-yellow"><div class="item-head"><span class="item-name">Bacon & Cheddar XL</span><span class="item-price">$7.500</span></div><div class="item-desc">Tocino ahumado y queso cheddar</div></div>
+    </div>
+    <div class="items-col">
+      <div class="sub-title" style="margin-top:0">Salchipapas</div>
+      <div class="item accent-orange"><div class="item-head"><span class="item-name">Normal</span><span class="item-price">$3.800</span></div></div>
+      <div class="item accent-orange"><div class="item-head"><span class="item-name">XL</span><span class="item-price">$6.300</span></div></div>
+      <div class="sub-title">Nuggets de Pollo</div>
+      <div class="item accent-cyan"><div class="item-head"><span class="item-name">6 Nuggets</span><span class="item-price">$2.500</span></div></div>
+      <div class="item accent-cyan"><div class="item-head"><span class="item-name">12 Nuggets</span><span class="item-price">$4.800</span></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- EMPANADAS -->
+<div class="section" id="empanadas">
+  <div class="cat-header"><div class="cat-dot" style="background:var(--orange)"></div><div class="cat-title" style="color:var(--orange)">Empanadas</div><div class="cat-rule"></div></div>
+  <div class="items-grid">
+    <div class="items-col">
+      <div class="item accent-orange"><div class="item-head"><span class="item-name">Carne Mechada</span><span class="item-price">$2.500</span></div></div>
+      <div class="item accent-orange"><div class="item-head"><span class="item-name">Pollo</span><span class="item-price">$2.000</span></div></div>
+      <div class="item accent-orange"><div class="item-head"><span class="item-name">Molida</span><span class="item-price">$2.000</span></div></div>
+      <div class="item accent-orange"><div class="item-head"><span class="item-name">Jamón Queso</span><span class="item-price">$2.000</span></div></div>
+    </div>
+    <div class="items-col">
+      <div class="item accent-orange"><div class="item-head"><span class="item-name">Pabellón</span><span class="item-price">$3.000</span></div></div>
+      <div class="item accent-orange"><div class="item-head"><span class="item-name">Caraota Queso</span><span class="item-price">$2.000</span></div></div>
+      <div class="item accent-orange"><div class="item-head"><span class="item-name">Perico Queso Llanero</span><span class="item-price">$2.500</span></div></div>
+      <div class="item accent-orange"><div class="item-head"><span class="item-name">Queso</span><span class="item-price">$2.000</span></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- TEQUEÑOS -->
+<div class="section" id="tequenos">
+  <div class="cat-header"><div class="cat-dot" style="background:var(--yellow)"></div><div class="cat-title" style="color:var(--yellow)">Tequeños</div><div class="cat-rule"></div></div>
+  <div class="sub-title">Tequeños 25cm</div>
+  <div class="items-grid">
+    <div class="items-col">
+      <div class="item accent-yellow"><div class="item-head"><span class="item-name">Queso</span><span class="item-price">$2.000</span></div></div>
+      <div class="item accent-yellow"><div class="item-head"><span class="item-name">Jamón Queso</span><span class="item-price">$2.500</span></div></div>
+      <div class="item accent-yellow"><div class="item-head"><span class="item-name">Guayaba / Queso</span><span class="item-price">$2.500</span></div></div>
+    </div>
+    <div class="items-col">
+      <div class="sub-title" style="margin-top:0">Tequeños 8cm</div>
+      <div class="item accent-cyan"><div class="item-head"><span class="item-name">4 unidades</span><span class="item-price">$2.500</span></div><div class="item-desc">Queso o Jamón Queso</div></div>
+      <div class="item accent-cyan"><div class="item-head"><span class="item-name">8 unidades</span><span class="item-price">$4.600</span></div></div>
+      <div class="item accent-cyan"><div class="item-head"><span class="item-name">12 unidades</span><span class="item-price">$6.990</span></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- BEBIDAS -->
+<div class="section" id="bebidas">
+  <div class="cat-header"><div class="cat-dot" style="background:var(--cyan)"></div><div class="cat-title" style="color:var(--cyan)">Bebidas</div><div class="cat-rule"></div></div>
+
+  <div class="drink-cat">
+    <div class="drink-cat-label"><span class="drink-icon">🥤</span><span class="drink-cat-name">Gaseosas</span></div>
+    <div class="items-grid">
+      <div class="item accent-cyan"><div class="item-head"><span class="item-name">Coca-Cola 500cc</span><span class="item-price">$1.200</span></div></div>
+      <div class="item accent-cyan"><div class="item-head"><span class="item-name">Sprite 500cc</span><span class="item-price">$1.200</span></div></div>
+      <div class="item accent-cyan"><div class="item-head"><span class="item-name">Fanta 500cc</span><span class="item-price">$1.200</span></div></div>
+      <div class="item accent-cyan"><div class="item-head"><span class="item-name">Bebida 1.5L</span><span class="item-price">$2.000</span></div><div class="item-desc">Coca-Cola, Sprite o Fanta</div></div>
+    </div>
   </div>
 
-  <button id="btn-whatsapp" type="button">Finalizar por WhatsApp</button>
-</section>
+  <div class="drink-cat">
+    <div class="drink-cat-label"><span class="drink-icon">🍊</span><span class="drink-cat-name">Jugos Naturales</span></div>
+    <div class="items-grid">
+      <div class="item accent-orange"><div class="item-head"><span class="item-name">Jugo de Naranja</span><span class="item-price">$1.800</span></div><div class="item-desc">Fruta natural exprimida</div></div>
+      <div class="item accent-orange"><div class="item-head"><span class="item-name">Jugo de Mango</span><span class="item-price">$2.000</span></div><div class="item-desc">Fruta natural licuada</div></div>
+      <div class="item accent-orange"><div class="item-head"><span class="item-name">Jugo de Piña</span><span class="item-price">$1.800</span></div><div class="item-desc">Fruta natural licuada</div></div>
+      <div class="item accent-orange"><div class="item-head"><span class="item-name">Jugo Maracuyá</span><span class="item-price">$2.000</span></div><div class="item-desc">Fruta natural licuada</div></div>
+    </div>
+  </div>
 
-<style>
-  .checkout-box {
-    margin-top: 20px;
-    padding: 16px;
-    border: 1px solid #2a2a2a;
-    border-radius: 12px;
-    background: #111;
-  }
+  <div class="drink-cat">
+    <div class="drink-cat-label"><span class="drink-icon">🇻🇪</span><span class="drink-cat-name">Bebidas Venezolanas <span class="ref-badge">Próximamente</span></span></div>
+    <div class="items-grid">
+      <div class="item accent-purple item-ref"><div class="item-head"><span class="item-name">Chicha de Arroz</span><span class="item-price">Ref.</span></div><div class="item-desc">Bebida tradicional venezolana, dulce y cremosa</div></div>
+      <div class="item accent-purple item-ref"><div class="item-head"><span class="item-name">Papelón con Limón</span><span class="item-price">Ref.</span></div><div class="item-desc">Panela natural con limón, muy refrescante</div></div>
+      <div class="item accent-purple item-ref"><div class="item-head"><span class="item-name">Malta Venezolana</span><span class="item-price">Ref.</span></div><div class="item-desc">Bebida de malta sin alcohol</div></div>
+      <div class="item accent-purple item-ref"><div class="item-head"><span class="item-name">Jugo de Tamarindo</span><span class="item-price">Ref.</span></div><div class="item-desc">Fruta tropical natural</div></div>
+    </div>
+  </div>
 
-  .checkout-box h3 {
-    margin: 0 0 12px 0;
-    font-size: 18px;
-    color: #fff;
-  }
+  <div class="drink-cat">
+    <div class="drink-cat-label"><span class="drink-icon">💧</span><span class="drink-cat-name">Agua Mineral</span></div>
+    <div class="items-grid">
+      <div class="item accent-green"><div class="item-head"><span class="item-name">Agua sin gas 500cc</span><span class="item-price">$800</span></div></div>
+      <div class="item accent-green"><div class="item-head"><span class="item-name">Agua con gas 500cc</span><span class="item-price">$900</span></div></div>
+    </div>
+  </div>
 
-  .checkout-grid {
-    display: grid;
-    gap: 10px;
-    margin-bottom: 14px;
-  }
+  <div class="drink-cat">
+    <div class="drink-cat-label"><span class="drink-icon">☕</span><span class="drink-cat-name">Café / Té</span></div>
+    <div class="items-grid">
+      <div class="item accent-purple"><div class="item-head"><span class="item-name">Café Americano</span><span class="item-price">$800</span></div></div>
+      <div class="item accent-purple"><div class="item-head"><span class="item-name">Café con Leche</span><span class="item-price">$1.000</span></div></div>
+      <div class="item accent-purple"><div class="item-head"><span class="item-name">Té / Infusión</span><span class="item-price">$800</span></div><div class="item-desc">Menta, manzanilla, canela</div></div>
+      <div class="item accent-purple"><div class="item-head"><span class="item-name">Chocolate caliente</span><span class="item-price">$1.200</span></div></div>
+    </div>
+  </div>
+</div>
 
-  .checkout-grid input,
-  .checkout-grid select {
-    width: 100%;
-    padding: 12px;
-    border-radius: 10px;
-    border: 1px solid #333;
-    background: #1a1a1a;
-    color: #fff;
-    outline: none;
-    box-sizing: border-box;
-  }
+<!-- FOOTER -->
+<div class="page-footer">
+  <div class="footer-brand">La <span class="footer-accent">Felicitta</span></div>
+  <div class="footer-info">📍 Barros Arana 504, Iquique &nbsp;·&nbsp; 🕗 08:30 – 00:00 todos los días</div>
+  <div class="footer-info">📞 <a href="tel:+56963376893" style="color:var(--cyan);text-decoration:none">+56 9 63376893</a></div>
+  <div class="footer-social">
+    <a class="social-btn" href="https://instagram.com/lafelicittacl" target="_blank">📸 Instagram</a>
+    <a class="social-btn" href="https://tiktok.com/@lafelicittacl" target="_blank">🎵 TikTok</a>
+    <a class="social-btn" href="https://facebook.com/lafelicittacl" target="_blank">📘 Facebook</a>
+    <a class="social-btn" href="https://wa.me/56963376893?text=Hola!%20Vi%20el%20men%C3%BA%20y%20quiero%20hacer%20un%20pedido%20%F0%9F%8D%94" target="_blank">💬 WhatsApp</a>
+  </div>
+  <div class="footer-divider"></div>
+  <div class="footer-bottom">© 2025 La Felicitta · Iquique, Chile · Menú digital</div>
+</div>
 
-  #btn-whatsapp {
-    width: 100%;
-    padding: 14px;
-    border: none;
-    border-radius: 10px;
-    background: #25d366;
-    color: white;
-    font-size: 16px;
-    font-weight: 700;
-    cursor: pointer;
-  }
-
-  #btn-whatsapp:hover {
-    opacity: 0.95;
-  }
-</style>
+<!-- WHATSAPP FLOTANTE -->
+<a class="wa-btn" href="https://wa.me/56963376893?text=Hola!%20Vi%20el%20men%C3%BA%20y%20quiero%20hacer%20un%20pedido%20%F0%9F%8D%94" target="_blank" title="Pedir por WhatsApp">💬</a>
 
 <script>
-  const TELEFONO_NEGOCIO = "56963376893";
-
-  function obtenerCarritoSeguro() {
-    try {
-      if (Array.isArray(window.carrito) && window.carrito.length >= 0) {
-        return window.carrito;
-      }
-
-      const posiblesKeys = ["carrito", "cart", "cartItems", "pedido"];
-      for (const key of posiblesKeys) {
-        const guardado = localStorage.getItem(key);
-        if (guardado) {
-          const parsed = JSON.parse(guardado);
-          if (Array.isArray(parsed)) {
-            return parsed;
-          }
-        }
-      }
-
-      return [];
-    } catch (error) {
-      console.error("Error leyendo carrito:", error);
-      return [];
-    }
-  }
-
-  function calcularTotalSeguro(carrito) {
-    return carrito.reduce((acc, item) => {
-      const precio = Number(item.precio || item.price || 0);
-      const cantidad = Number(item.cantidad || item.qty || 1);
-      return acc + (precio * cantidad);
-    }, 0);
-  }
-
-  function limpiarTexto(valor) {
-    return String(valor || "").trim();
-  }
-
-  function formatearMonedaCLP(numero) {
-    try {
-      return new Intl.NumberFormat("es-CL").format(Number(numero || 0));
-    } catch {
-      return String(numero || 0);
-    }
-  }
-
-  function construirMensajeWhatsApp() {
-    const carrito = obtenerCarritoSeguro();
-
-    if (!carrito.length) {
-      alert("Tu carrito está vacío.");
-      return null;
-    }
-
-    const nombre = limpiarTexto(document.getElementById("nombre")?.value);
-    const telefono = limpiarTexto(document.getElementById("telefono")?.value);
-    const direccion = limpiarTexto(document.getElementById("direccion")?.value);
-    const metodoEntrega = limpiarTexto(document.getElementById("metodoEntrega")?.value) || "Delivery";
-    const metodoPago = limpiarTexto(document.getElementById("metodoPago")?.value) || "Efectivo";
-
-    let mensaje = "🍔 *Nuevo pedido - La Felicitta*\n\n";
-
-    if (nombre) {
-      mensaje += "👤 *Nombre:* " + nombre + "\n";
-    }
-
-    if (telefono) {
-      mensaje += "📞 *Teléfono:* " + telefono + "\n";
-    }
-
-    if (direccion) {
-      mensaje += "📍 *Dirección:* " + direccion + "\n";
-    }
-
-    mensaje += "🛵 *Entrega:* " + metodoEntrega + "\n";
-    mensaje += "💳 *Pago:* " + metodoPago + "\n\n";
-    mensaje += "*Detalle del pedido:*\n";
-
-    carrito.forEach((item) => {
-      const nombreProducto = item.nombre || item.name || "Producto";
-      const cantidad = Number(item.cantidad || item.qty || 1);
-      const precio = Number(item.precio || item.price || 0);
-      const subtotal = cantidad * precio;
-
-      mensaje += "- " + cantidad + " x " + nombreProducto + " = $" + formatearMonedaCLP(subtotal) + "\n";
-
-      if (item.nota) {
-        mensaje += "  Nota: " + item.nota + "\n";
-      }
-    });
-
-    const total = calcularTotalSeguro(carrito);
-
-    mensaje += "\n💰 *Total:* $" + formatearMonedaCLP(total) + "\n";
-
-    if (metodoPago.toLowerCase() === "transferencia") {
-      mensaje += "\n*Datos para transferencia:*\n";
-      mensaje += "La Felicitta\n";
-      mensaje += "RUT: 267162433\n";
-      mensaje += "Mercado Pago\n";
-      mensaje += "Cuenta Vista\n";
-      mensaje += "Número de cuenta: 1059389577\n";
-      mensaje += "Correo: ventas@lafelicittacl.com\n";
-    }
-
-    mensaje += "\n📍 *Local:* Barros Arana 504, Iquique\n";
-    mensaje += "📞 *Contacto:* +56 9 63376893";
-
-    return mensaje;
-  }
-
-  function enviarPedidoWhatsApp() {
-    try {
-      const mensaje = construirMensajeWhatsApp();
-      if (!mensaje) return;
-
-      const url = "https://wa.me/" + TELEFONO_NEGOCIO + "?text=" + encodeURIComponent(mensaje);
-      window.open(url, "_blank");
-    } catch (error) {
-      console.error("Error al abrir WhatsApp:", error);
-      alert("Hubo un problema al abrir WhatsApp.");
-    }
-  }
-
-  document.addEventListener("DOMContentLoaded", function () {
-    const boton = document.getElementById("btn-whatsapp");
-
-    if (boton) {
-      boton.addEventListener("click", enviarPedidoWhatsApp);
-    } else {
-      console.warn("No se encontró el botón con id btn-whatsapp");
-    }
-  });
+function show(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
 </script>
+</body>
+</html>
