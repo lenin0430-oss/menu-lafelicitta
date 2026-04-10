@@ -539,6 +539,20 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 </script>
+<!-- FORMULARIO DELIVERY / RETIRO -->
+<div style="padding:15px;background:#111;margin:15px;border-radius:8px;">
+  <h3 style="color:#fff;">Tipo de pedido</h3>
 
+  <select id="tipoEntrega" style="width:100%;padding:10px;margin-top:10px;">
+    <option value="retiro">Retiro en local</option>
+    <option value="delivery">Delivery</option>
+  </select>
+
+  <input id="nombreCliente" placeholder="Nombre del cliente"
+    style="width:100%;padding:10px;margin-top:10px;" />
+
+  <input id="direccionCliente" placeholder="Dirección (solo delivery)"
+    style="width:100%;padding:10px;margin-top:10px;" />
+</div>
 </body>
 </html>
