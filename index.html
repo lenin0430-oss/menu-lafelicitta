@@ -140,6 +140,9 @@ body{background:#07070f;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',
 
 <!-- BURGERS -->
 <div class="section active" id="burgers">
+  <button onclick="pedir('Hamburguesa clásica', 3000)">
+Pedir por WhatsApp
+</button>
   <div class="cat-header"><div class="cat-dot" style="background:var(--cyan)"></div><div class="cat-title" style="color:var(--cyan)">Hamburguesas</div><div class="cat-rule"></div><div class="cat-count">7 opciones</div></div>
   <div class="sub-title">Clásicas — Pan Brioche</div>
   <div class="items-grid">
@@ -423,7 +426,9 @@ body{background:#07070f;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',
 </div>
 
 <!-- WHATSAPP FLOTANTE -->
-<a class="wa-btn" href="https://wa.me/56963376893?text=Hola!%20Vi%20el%20men%C3%BA%20y%20quiero%20hacer%20un%20pedido%20%F0%9F%8D%94" target="_blank" title="Pedir por WhatsApp">💬</a>
+<a class="wa-btn" href="https://wa.me/56963376893?text=Hola!%20Vi%20el%20men%C3%BA%20y%20quiero%20hacer%20un%20pedido%20%F0%9F%8D%94" target="_blank" title="<button onclick="pedir('Hamburguesa clásica', 3000)">
+Pedir por WhatsApp
+</button>">💬</a>
 
 <script>
 function show(id, btn) {
@@ -432,7 +437,17 @@ function show(id, btn) {
   document.getElementById(id).classList.add('active');
   btn.classList.add('active');
   window.scrollTo({top: 0, behavior: 'smooth'});
+}<script>
+function pedir(nombre, precio) {
+  const telefono = "56963376893";
+
+  const mensaje = `Hola, quiero pedir:\n\n🍔 ${nombre}\n💰 Precio: $${precio}`;
+
+  const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
+
+  window.open(url, '_blank');
 }
+</script>
 </script>
 </body>
 </html>
