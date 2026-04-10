@@ -511,5 +511,33 @@ document.addEventListener("DOMContentLoaded", () => {
     btn.addEventListener("click", enviarPedidoWhatsApp);
   }
 });
+</script><script>
+let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+// 🔥 AGREGA PRODUCTO AL HACER CLICK
+document.querySelectorAll(".card").forEach(card => {
+  card.addEventListener("click", () => {
+    const nombre = card.querySelector(".card-title")?.innerText || "Producto";
+    const precioTexto = card.querySelector(".price")?.innerText || "$0";
+
+    const precio = parseInt(precioTexto.replace(/\D/g, ""));
+
+    const existe = carrito.find(item => item.nombre === nombre);
+
+    if (existe) {
+      existe.cantidad++;
+    } else {
+      carrito.push({
+        nombre: nombre,
+        precio: precio,
+        cantidad: 1
+      });
+    }
+
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+
+    alert("✅ Agregado: " + nombre);
+  });
+});
 </script></body>
 </html>
