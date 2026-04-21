@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Felicitta — TV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;background:#1a0500;font-family:'Plus Jakarta Sans',sans-serif}
+
+.screen{width:100vw;height:100vh;position:relative;overflow:hidden;background:#1a0500}
+
+.slide{position:absolute;inset:0;opacity:0;transition:opacity .8s ease}
+.slide.active{opacity:1}
+
+/* ====== SLIDE 0: HERO ====== */
+.s0{background:radial-gradient(ellipse at 30% 50%,#C41E00 0%,#7A0000 45%,#1a0500 100%)}
+.s0-content{position:absolute;inset:0;display:flex;align-items:center;padding:0 5vw}
+.s0-left{flex:1}
+.s0-pill{display:inline-block;background:#FF4500;color:#fff;font-size:1.1vw;font-weight:800;letter-spacing:.25em;text-transform:uppercase;padding:.5vw 1.5vw;border-radius:50px;margin-bottom:1.5vw}
+.s0-logo{font-family:'Bebas Neue',sans-serif;font-size:12vw;color:#fff;line-height:.9;text-shadow:4px 4px 0 rgba(0,0,0,.3)}
+.s0-logo em{color:#FFA500;font-style:normal}
+.s0-sub{font-size:1.6vw;color:rgba(255,200,150,.7);margin-top:1.5vw;line-height:1.7;font-weight:500}
+.s0-badges{display:flex;gap:1vw;margin-top:2.5vw;flex-wrap:wrap}
+.s0-badge{padding:.6vw 1.5vw;background:rgba(255,69,0,.25);border:1px solid rgba(255,100,0,.5);border-radius:50px;font-size:1vw;font-weight:600;color:#FFB347}
+.s0-right{width:40%;display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:1.2vw}
+.s0-dish{background:rgba(255,255,255,.05);border:1px solid rgba(255,100,0,.2);border-radius:1vw;padding:1.2vw 1.8vw;text-align:right;width:100%}
+.s0-dish-name{font-size:1.3vw;font-weight:700;color:#fff}
+.s0-dish-price{font-family:'Bebas Neue',sans-serif;font-size:2.8vw;color:#FFA500}
+.s0-addr{font-size:.95vw;color:rgba(255,180,100,.3);margin-top:2vw;letter-spacing:.08em;text-align:right}
+.s0-flame{position:absolute;right:2vw;top:50%;transform:translateY(-50%);font-size:18vw;opacity:.04;pointer-events:none;user-select:none}
+
+/* ====== MENU SLIDES ====== */
+.ms{display:flex;flex-direction:column;padding:2.8vw 3.5vw 1.8vw}
+.ms-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:2vw;padding-bottom:1.2vw;border-bottom:3px solid}
+.ms-cat{font-family:'Bebas Neue',sans-serif;font-size:5vw;line-height:1;letter-spacing:.03em}
+.ms-brand{font-size:1vw;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.2)}
+.grid{display:grid;gap:1.2vw;flex:1}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+
+.card{border-radius:1vw;padding:1.6vw 1.8vw;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+.card::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.04) 0%,transparent 60%);pointer-events:none}
+.c-name{font-size:1.4vw;font-weight:800;line-height:1.2;margin-bottom:.4vw}
+.c-desc{font-size:.95vw;line-height:1.5;flex:1;margin-bottom:.9vw;font-weight:400}
+.c-price{font-family:'Bebas Neue',sans-serif;font-size:2.8vw;line-height:1}
+.c-price small{font-family:'Plus Jakarta Sans',sans-serif;font-size:.85vw;font-weight:600;margin-left:.2vw;opacity:.55}
+.badge{position:absolute;top:.7vw;right:.7vw;font-size:.75vw;font-weight:900;padding:.25vw .7vw;border-radius:.3vw;text-transform:uppercase;letter-spacing:.06em}
+
+/* BURGERS — Rojo tomate */
+.bg1{background:#1a0500}
+.bg1 .ms-top{border-color:#E53200;color:#FF5722}
+.bg1 .card{background:linear-gradient(145deg,#2a0800,#1a0300);border:1px solid rgba(229,50,0,.3)}
+.bg1 .c-name{color:#FFD0B0}
+.bg1 .c-desc{color:rgba(255,180,130,.5)}
+.bg1 .c-price{color:#FF6B35}
+
+/* PERROS — Mostaza */
+.bg2{background:#1a1000}
+.bg2 .ms-top{border-color:#F9A825;color:#FFD740}
+.bg2 .card{background:linear-gradient(145deg,#2a1900,#1a1000);border:1px solid rgba(249,168,37,.3)}
+.bg2 .c-name{color:#FFF3CC}
+.bg2 .c-desc{color:rgba(255,220,120,.5)}
+.bg2 .c-price{color:#FFD740}
+
+/* AREPAS — Naranja cálido */
+.bg3{background:#1a0b00}
+.bg3 .ms-top{border-color:#FF7043;color:#FF8A65}
+.bg3 .card{background:linear-gradient(145deg,#2a1000,#1a0800);border:1px solid rgba(255,112,67,.3)}
+.bg3 .c-name{color:#FFE0CC}
+.bg3 .c-desc{color:rgba(255,190,150,.5)}
+.bg3 .c-price{color:#FF7043}
+
+/* TEQUEÑOS — Dorado queso */
+.bg4{background:#140f00}
+.bg4 .ms-top{border-color:#FFC107;color:#FFD54F}
+.bg4 .card{background:linear-gradient(145deg,#231800,#140f00);border:1px solid rgba(255,193,7,.3)}
+.bg4 .c-name{color:#FFF8CC}
+.bg4 .c-desc{color:rgba(255,230,100,.45)}
+.bg4 .c-price{color:#FFC107}
+
+/* CHURROS — Canela/ámbar */
+.bg5{background:#1a0a00}
+.bg5 .ms-top{border-color:#FF6F00;color:#FFA726}
+.bg5 .card{background:linear-gradient(145deg,#2a1200,#1a0800);border:1px solid rgba(255,111,0,.3)}
+.bg5 .c-name{color:#FFE5C0}
+.bg5 .c-desc{color:rgba(255,190,100,.5)}
+.bg5 .c-price{color:#FFA726}
+
+/* PEPITOS — Rojo intenso */
+.bg6{background:#160000}
+.bg6 .ms-top{border-color:#D32F2F;color:#EF5350}
+.bg6 .card{background:linear-gradient(145deg,#250000,#160000);border:1px solid rgba(211,47,47,.3)}
+.bg6 .c-name{color:#FFCCCC}
+.bg6 .c-desc{color:rgba(255,150,150,.45)}
+.bg6 .c-price{color:#FF5252}
+
+/* Progress */
+.pb{position:absolute;bottom:0;left:0;height:5px;z-index:99;border-radius:0 3px 3px 0;transition:width .08s linear}
+.dots{position:absolute;bottom:1.5vw;right:2.5vw;display:flex;gap:.6vw;z-index:99}
+.dot{width:.65vw;height:.65vw;border-radius:50%;background:rgba(255,255,255,.2);cursor:pointer;transition:all .3s}
+.dot.a{background:#FFA500;transform:scale(1.5)}
+.scan{position:absolute;bottom:1.4vw;left:3vw;font-size:.85vw;color:rgba(255,180,100,.3);z-index:99;letter-spacing:.05em}
+.scan strong{color:rgba(255,160,60,.5)}
+</style>
+</head>
+<body>
+<div class="screen" id="scr">
+
+  <!-- S0 HERO -->
+  <div class="slide s0 active" id="s0">
+    <div class="s0-flame">🔥</div>
+    <div class="s0-content">
+      <div class="s0-left">
+        <div class="s0-pill">🔥 Recién hecho</div>
+        <div class="s0-logo">La<br><em>Felicitta</em></div>
+        <div class="s0-sub">Burgers · Arepas · Perros · Cachapas<br>Tequeños · Pepitos · Churros</div>
+        <div class="s0-badges">
+          <div class="s0-badge">🕗 08:30 – 00:00</div>
+          <div class="s0-badge">🛵 Delivery Express</div>
+          <div class="s0-badge">📍 Barros Arana 504</div>
+        </div>
+      </div>
+      <div class="s0-right">
+        <div class="s0-dish"><div class="s0-dish-name">🌭 El de Luka</div><div class="s0-dish-price">$1.000</div></div>
+        <div class="s0-dish"><div class="s0-dish-name">🫓 Arepa a tu gusto</div><div class="s0-dish-price">$3.500</div></div>
+        <div class="s0-dish"><div class="s0-dish-name">🍔 La Feliccita</div><div class="s0-dish-price">$3.500</div></div>
+        <div class="s0-dish"><div class="s0-dish-name">🍩 8 Churros + Salsas</div><div class="s0-dish-price">$5.500</div></div>
+        <div class="s0-dish"><div class="s0-dish-name">🌽 Cachapa Cochino + Queso</div><div class="s0-dish-price">$10.000</div></div>
+        <div class="s0-addr">menu-lafelicitta.vercel.app · WhatsApp +56 9 6337 6893</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S1 BURGERS -->
+  <div class="slide ms bg1" id="s1">
+    <div class="ms-top">
+      <div class="ms-cat">🍔 Hamburguesas</div>
+      <div class="ms-brand">La Felicitta</div>
+    </div>
+    <div class="grid g3">
+      <div class="card">
+        <div class="c-name">La Feliccita</div>
+        <div class="c-desc">Carne, papas hilo, tomate, lechuga, ketchup, mostaza, mayo · pan brioche</div>
+        <div class="c-price">$3.500<small>CLP</small></div>
+      </div>
+      <div class="card">
+        <div class="c-name">Especial de Carne</div>
+        <div class="c-desc">Carne, queso gouda, huevo, papas hilo, cebolla, tomate, lechuga + salsa de la casa</div>
+        <div class="c-price">$5.000<small>CLP</small></div>
+      </div>
+      <div class="card">
+        <div class="c-name">Super de Carne</div>
+        <div class="c-desc">Proteína, huevo, queso gouda, cebolla morada, lechuga, tomate, tocino, salsas + papas hilo</div>
+        <div class="c-price">$6.000<small>CLP</small></div>
+      </div>
+      <div class="card">
+        <div class="c-name">La Pelua</div>
+        <div class="c-desc">Carne mechada, huevo, tocino ahumado, lechuga, tomate, cebolla morada, queso gouda</div>
+        <div class="c-price">$8.500<small>CLP</small></div>
+      </div>
+      <div class="card" style="border-color:rgba(255,150,50,.5)">
+        <div class="badge" style="background:#FF6B35;color:#fff">XL 200g</div>
+        <div class="c-name">La Luna XL</div>
+        <div class="c-desc">200g carne, tocineta, huevo, queso gouda, lechuga, tomate, cebolla morada + papas fritas</div>
+        <div class="c-price">$7.500<small>CLP</small></div>
+      </div>
+      <div class="card" style="border-color:rgba(255,150,50,.5)">
+        <div class="badge" style="background:#FF6B35;color:#fff">XL 200g</div>
+        <div class="c-name">La Casa Club XL</div>
+        <div class="c-desc">200g carne, salsa de la casa, cebolla caramelizada, tocino, queso cheddar + papas fritas</div>
+        <div class="c-price">$9.500<small>CLP</small></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S2 PERROS -->
+  <div class="slide ms bg2" id="s2">
+    <div class="ms-top">
+      <div class="ms-cat">🌭 Perros Calientes</div>
+      <div class="ms-brand">La Felicitta</div>
+    </div>
+    <div class="grid g3">
+      <div class="card" style="border-color:rgba(249,168,37,.55)">
+        <div class="badge" style="background:#FFD740;color:#000">⭐ ESTRELLA</div>
+        <div class="c-name">El de Luka</div>
+        <div class="c-desc">Pan 15cm, salchicha, repollo c/cilantro, papas hilo, ketchup, mayo, mostaza</div>
+        <div class="c-price">$1.000<small>CLP</small></div>
+      </div>
+      <div class="card">
+        <div class="c-name">El Callejero</div>
+        <div class="c-desc">Pan 20cm, salchicha, repollo, papas hilo, queso gouda, ketchup, mayo-ajo, mostaza</div>
+        <div class="c-price">$2.500<small>CLP</small></div>
+      </div>
+      <div class="card">
+        <div class="c-name">El Perro Loco</div>
+        <div class="c-desc">Pan 22cm, salchicha, repollo, maíz, tocineta, papas hilo, queso gouda, salsas</div>
+        <div class="c-price">$3.500<small>CLP</small></div>
+      </div>
+      <div class="card">
+        <div class="c-name">El Chileno</div>
+        <div class="c-desc">Pan 22cm, repollo c/cilantro, tomate, aguacate, papas hilo, queso gouda</div>
+        <div class="c-price">$3.500<small>CLP</small></div>
+      </div>
+      <div class="card">
+        <div class="c-name">El Americano</div>
+        <div class="c-desc">Pan 22cm, repollo, tocineta en trozos, queso cheddar derretido, papas hilo</div>
+        <div class="c-price">$3.990<small>CLP</small></div>
+      </div>
+      <div class="card">
+        <div class="c-name">El Peluo</div>
+        <div class="c-desc">Pan 22cm, carne mechada casera, repollo c/cilantro, tomate, papas hilo, queso gouda</div>
+        <div class="c-price">$3.990<small>CLP</small></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S3 AREPAS + CACHAPAS -->
+  <div class="slide ms bg3" id="s3">
+    <div class="ms-top">
+      <div class="ms-cat">🫓 Arepas &amp; Cachapas 🌽</div>
+      <div class="ms-brand">La Felicitta</div>
+    </div>
+    <div class="grid g4">
+      <div class="card">
+        <div class="c-name">Arepa a tu gusto</div>
+        <div class="c-desc">5 ingredientes: carne mechada, pollo, pernil, caraotas, queso y más</div>
+        <div class="c-price">$3.500<small>CLP</small></div>
+      </div>
+      <div class="card">
+        <div class="c-name">Cachapa con Queso</div>
+        <div class="c-desc">Maíz 100%, queso rallado, mantequilla, natilla</div>
+        <div class="c-price">$6.500<small>CLP</small></div>
+      </div>
+      <div class="card">
+        <div class="c-name">Cachapa Cochino Frito</div>
+        <div class="c-desc">250g pulpa de cochino frito, queso rallado, natilla</div>
+        <div class="c-price">$8.500<small>CLP</small></div>
+      </div>
+      <div class="card" style="border-color:rgba(255,112,67,.6)">
+        <div class="badge" style="background:#FF7043;color:#fff">TOP</div>
+        <div class="c-name">Cachapa Cochino + Queso</div>
+        <div class="c-desc">½kg queso de mano + pulpa de cochino, mantequilla y natilla</div>
+        <div class="c-price">$10.000<small>CLP</small></div>
+      </div>
+      <div class="card">
+        <div class="c-name">Patacón Normal</div>
+        <div class="c-desc">Carne o pollo mechado, queso rallado, ensalada, tomate, lechuga, salsas</div>
+        <div class="c-price">$7.500<small>CLP</small></div>
+      </div>
+      <div class="card">
+        <div class="c-name">Patacón Especial</div>
+        <div class="c-desc">Carne mechada, jamón, tocineta, queso gauda, ensalada completa</div>
+        <div class="c-price">$8.500<small>CLP</small></div>
+      </div>
+      <div class="card" style="border-color:rgba(255,112,67,.6)">
+        <div class="badge" style="background:#FF7043;color:#fff">TOP</div>
+        <div class="c-name">Patacón Mixto</div>
+        <div class="c-desc">Carne + pollo mechado, jamón, tocineta, queso gauda, ensalada completa</div>
+        <div class="c-price">$12.000<small>CLP</small></div>
+      </div>
+      <div class="card">
+        <div class="c-name">Cachapa Queso de Mano</div>
+        <div class="c-desc">½kg queso de mano, mantequilla, natilla — el clásico venezolano</div>
+        <div class="c-price">$7.500<small>CLP</small></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S4 TEQUEÑOS + EMPANADAS -->
+  <div class="slide ms bg4" id="s4">
+    <div class="ms-top">
+      <div class="ms-cat">🧀 Tequeños &amp; Empanadas 🥟</div>
+      <div class="ms-brand">La Felicitta</div>
+    </div>
+    <div class="grid g4">
+      <div class="card">
+        <div class="c-name">Tequeño 25cm — Queso</div>
+        <div class="c-desc">Masa crujiente rellena de queso blanco venezolano</div>
+        <div class="c-price">$2.500<small>CLP</small></div>
+      </div>
+      <div class="card">
+        <div class="c-name">Tequeño 25cm — Jamón Queso</div>
+        <div class="c-desc">Jamón ahumado y queso fundido en masa dorada</div>
+        <div class="c-price">$2.500<small>CLP</small></div>
+      </div>
+      <div class="card">
+        <div class="c-name">Mini Tequeños — 8 uds</div>
+        <div class="c-desc">Queso o Jamón Queso · tamaño cóctel 8cm</div>
+        <div class="c-price">$4.900<small>CLP</small></div>
+      </div>
+      <div class="card">
+        <div class="c-name">Mini Tequeños — 12 uds</div>
+        <div class="c-desc">Queso o Jamón Queso · tamaño cóctel · para compartir</div>
+        <div class="c-price">$6.900<small>CLP</small></div>
+      </div>
+      <div class="card">
+        <div class="c-name">Empanada Carne Mechada</div>
+        <div class="c-desc">Carne mechada sazonada con guiso venezolano tradicional</div>
+        <div class="c-price">$3.000<small>CLP</small></div>
+      </div>
+      <div class="card">
+        <div class="c-name">Empanada Pabellón</div>
+        <div class="c-desc">Carne mechada + caraotas negras, sabor venezolano puro</div>
+        <div class="c-price">$3.000<small>CLP</small></div>
+      </div>
+      <div class="card">
+        <div class="c-name">Empanada Jamón Queso</div>
+        <div class="c-desc">Jamón y queso fundido · combo clásico irresistible</div>
+        <div class="c-price">$2.500<small>CLP</small></div>
+      </div>
+      <div class="card">
+        <div class="c-name">Empanada de Pollo</div>
+        <div class="c-desc">Pollo mechado sazonado con especias venezolanas</div>
+        <div class="c-price">$2.500<small>CLP</small></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S5 CHURROS + PASAPALOS -->
+  <div class="slide ms bg5" id="s5">
+    <div class="ms-top">
+      <div class="ms-cat">🍩 Churros &amp; Pasapalos 🫙</div>
+      <div class="ms-brand">La Felicitta</div>
+    </div>
+    <div class="grid g3">
+      <div class="card">
+        <div class="c-name">8 Churros — Azúcar Flor</div>
+        <div class="c-desc">Recién fritos, crujientes por fuera y esponjosos por dentro</div>
+        <div class="c-price">$4.500<small>CLP</small></div>
+      </div>
+      <div class="card" style="border-color:rgba(255,111,0,.55)">
+        <div class="badge" style="background:#FFA726;color:#000">⭐ MÁS PEDIDO</div>
+        <div class="c-name">14 Churros + 2 Salsas</div>
+        <div class="c-desc">Elige 2: manjar · chocolate · leche condensada · azúcar flor</div>
+        <div class="c-price">$6.500<small>CLP</small></div>
+      </div>
+      <div class="card">
+        <div class="c-name">20 Churros + 2 Salsas</div>
+        <div class="c-desc">Ideal para compartir · 2 salsas a gusto</div>
+        <div class="c-price">$7.500<small>CLP</small></div>
+      </div>
+      <div class="card">
+        <div class="c-name">Mix Uno — 50 uds</div>
+        <div class="c-desc">25 mini tequeños + 25 mini pasteles · con anticipación · 50% al reservar</div>
+        <div class="c-price">$14.500<small>CLP</small></div>
+      </div>
+      <div class="card" style="border-color:rgba(255,111,0,.55)">
+        <div class="badge" style="background:#FFA726;color:#000">POPULAR</div>
+        <div class="c-name">Mix Dos — 75 uds</div>
+        <div class="c-desc">25 mini tequeños · 25 mini pasteles · 25 bolitas de carne</div>
+        <div class="c-price">$23.900<small>CLP</small></div>
+      </div>
+      <div class="card">
+        <div class="c-name">Mix Full — 200 uds</div>
+        <div class="c-desc">Tequeños · pasteles · bolitas carne · mini pizzas · mini empanadas</div>
+        <div class="c-price">$63.900<small>CLP</small></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S6 PEPITOS + PAPAS -->
+  <div class="slide ms bg6" id="s6">
+    <div class="ms-top">
+      <div class="ms-cat">🥖 Pepitos &amp; Papas 🍟</div>
+      <div class="ms-brand">La Felicitta</div>
+    </div>
+    <div class="grid g4">
+      <div class="card">
+        <div class="c-name">Pepito de Pollo 15cm</div>
+        <div class="c-desc">200g pollo, huevo, tocineta, queso gouda, lechuga, tomate, cebolla caramelizada</div>
+        <div class="c-price">$7.500<small>CLP</small></div>
+      </div>
+      <div class="card">
+        <div class="c-name">Pepito de Carne 15cm</div>
+        <div class="c-desc">200g carne, huevo, tocineta, queso gouda, lechuga, tomate, cebolla caramelizada</div>
+        <div class="c-price">$8.500<small>CLP</small></div>
+      </div>
+      <div class="card">
+        <div class="c-name">Pepito Mixto 15cm</div>
+        <div class="c-desc">100g pollo + 100g carne + 100g chorizo, huevo, tocineta, queso gouda</div>
+        <div class="c-price">$9.500<small>CLP</small></div>
+      </div>
+      <div class="card" style="border-color:rgba(211,47,47,.6)">
+        <div class="badge" style="background:#FF5252;color:#fff">BESTIA 30cm</div>
+        <div class="c-name">Pepito Mixto XL</div>
+        <div class="c-desc">100g carne + pollo + chorizo + chuleta ahumada, huevo, tocineta, queso gouda</div>
+        <div class="c-price">$14.990<small>CLP</small></div>
+      </div>
+      <div class="card">
+        <div class="c-name">Papas Fritas Normal</div>
+        <div class="c-desc">Papas crujientes + ketchup</div>
+        <div class="c-price">$3.500<small>CLP</small></div>
+      </div>
+      <div class="card">
+        <div class="c-name">Bacon &amp; Cheddar XL</div>
+        <div class="c-desc">Papas XL + tocino ahumado + queso cheddar derretido</div>
+        <div class="c-price">$9.990<small>CLP</small></div>
+      </div>
+      <div class="card">
+        <div class="c-name">Salchipapas XL</div>
+        <div class="c-desc">Papas fritas XL con salchicha y salsas a gusto</div>
+        <div class="c-price">$7.990<small>CLP</small></div>
+      </div>
+      <div class="card">
+        <div class="c-name">Nuggets 12 uds</div>
+        <div class="c-desc">Nuggets de pollo crocantes con salsa a gusto</div>
+        <div class="c-price">$7.500<small>CLP</small></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pb" id="pb" style="width:0%;background:#FF4500"></div>
+  <div class="dots" id="dts"></div>
+  <div class="scan"><strong>menu-lafelicitta.vercel.app</strong> · WhatsApp +56 9 6337 6893</div>
+</div>
+
+<script>
+const TOTAL=7,DUR=7000;
+const COLORS=['linear-gradient(90deg,#C41E00,#FF4500)','linear-gradient(90deg,#E53200,#FF7043)','linear-gradient(90deg,#F9A825,#FFD740)','linear-gradient(90deg,#FF7043,#FF8A65)','linear-gradient(90deg,#FFC107,#FFD54F)','linear-gradient(90deg,#FF6F00,#FFA726)','linear-gradient(90deg,#D32F2F,#EF5350)'];
+let cur=0,t0=null,raf;
+const slides=document.querySelectorAll('.slide');
+const pb=document.getElementById('pb');
+const dts=document.getElementById('dts');
+for(let i=0;i<TOTAL;i++){const d=document.createElement('div');d.className='dot'+(i===0?' a':'');d.addEventListener('click',()=>goTo(i));dts.appendChild(d);}
+const dotEls=dts.querySelectorAll('.dot');
+function goTo(i){slides[cur].classList.remove('active');dotEls[cur].classList.remove('a');cur=i;slides[cur].classList.add('active');dotEls[cur].classList.add('a');pb.style.background=COLORS[cur];t0=null;cancelAnimationFrame(raf);tick();}
+function tick(ts){if(!t0)t0=ts||performance.now();const p=Math.min((ts-t0)/DUR*100,100);pb.style.width=p+'%';if(p>=100){goTo((cur+1)%TOTAL);return;}raf=requestAnimationFrame(tick);}
+pb.style.background=COLORS[0];
+requestAnimationFrame(tick);
+</script>
+</body>
+</html>
