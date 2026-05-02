@@ -710,15 +710,24 @@ function sendWA(){
 }
 
 function scrollTo(id,btn){
-  document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'});
+  const el=document.getElementById(id);
+  if(!el)return;
+  const hdrH=document.querySelector('.hdr').offsetHeight;
+  const catsH=document.querySelector('.cats').offsetHeight;
+  const offset=hdrH+catsH+8;
+  const top=el.getBoundingClientRect().top+window.pageYOffset-offset;
+  window.scrollTo({top,behavior:'smooth'});
   document.querySelectorAll('.cat').forEach(b=>b.classList.remove('on'));
   if(btn)btn.classList.add('on');
 }
 
 const secs=['burgers','perros','completos','arepas','cachapas','arroz','pepitos','patacones','papas','empanadas','tequenos','pasapalos','churros','bebidas'];
 window.addEventListener('scroll',()=>{
+  const hdrH=document.querySelector('.hdr').offsetHeight;
+  const catsH=document.querySelector('.cats').offsetHeight;
+  const threshold=hdrH+catsH+20;
   let cur=secs[0];
-  secs.forEach(id=>{const el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<180)cur=id;});
+  secs.forEach(id=>{const el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<threshold)cur=id;});
   const btns=document.querySelectorAll('.cat');
   secs.forEach((id,i)=>{if(btns[i])btns[i].classList.toggle('on',id===cur);});
 },{passive:true});
