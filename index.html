@@ -111,20 +111,20 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 
 <nav class="cats" id="cats">
   <div class="cats-inner">
-    <button class="cat on" onclick="scrollTo('burgers',this)">🍔 Burgers</button>
-    <button class="cat" onclick="scrollTo('perros',this)">🌭 Perros</button>
-    <button class="cat" onclick="scrollTo('completos',this)">🥖 Completos</button>
-    <button class="cat" onclick="scrollTo('arepas',this)">🫓 Arepas</button>
-    <button class="cat" onclick="scrollTo('cachapas',this)">🌽 Cachapas</button>
-    <button class="cat" onclick="scrollTo('arroz',this)">🍚 Arroz chino</button>
-    <button class="cat" onclick="scrollTo('pepitos',this)">🥙 Pepitos</button>
-    <button class="cat" onclick="scrollTo('patacones',this)">🫔 Patacones</button>
-    <button class="cat" onclick="scrollTo('papas',this)">🍟 Papas</button>
-    <button class="cat" onclick="scrollTo('empanadas',this)">🥟 Empanadas</button>
-    <button class="cat" onclick="scrollTo('tequenos',this)">🧀 Tequeños</button>
-    <button class="cat" onclick="scrollTo('pasapalos',this)">🫙 Pasapalos</button>
-    <button class="cat" onclick="scrollTo('churros',this)">🍩 Churros</button>
-    <button class="cat" onclick="scrollTo('bebidas',this)">🥤 Bebidas</button>
+    <button class="cat on" onclick="goTo('burgers',this)">🍔 Burgers</button>
+    <button class="cat" onclick="goTo('perros',this)">🌭 Perros</button>
+    <button class="cat" onclick="goTo('completos',this)">🥖 Completos</button>
+    <button class="cat" onclick="goTo('arepas',this)">🫓 Arepas</button>
+    <button class="cat" onclick="goTo('cachapas',this)">🌽 Cachapas</button>
+    <button class="cat" onclick="goTo('arroz',this)">🍚 Arroz chino</button>
+    <button class="cat" onclick="goTo('pepitos',this)">🥙 Pepitos</button>
+    <button class="cat" onclick="goTo('patacones',this)">🫔 Patacones</button>
+    <button class="cat" onclick="goTo('papas',this)">🍟 Papas</button>
+    <button class="cat" onclick="goTo('empanadas',this)">🥟 Empanadas</button>
+    <button class="cat" onclick="goTo('tequenos',this)">🧀 Tequeños</button>
+    <button class="cat" onclick="goTo('pasapalos',this)">🫙 Pasapalos</button>
+    <button class="cat" onclick="goTo('churros',this)">🍩 Churros</button>
+    <button class="cat" onclick="goTo('bebidas',this)">🥤 Bebidas</button>
   </div>
 </nav>
 
@@ -709,7 +709,7 @@ function sendWA(){
   window.open('https://wa.me/56963376893?text='+encodeURIComponent(msg),'_blank');
 }
 
-function scrollTo(id,btn){
+function goTo(id,btn){
   const el=document.getElementById(id);
   if(!el)return;
   const hdrH=document.querySelector('.hdr').offsetHeight;
