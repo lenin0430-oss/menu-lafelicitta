@@ -111,7 +111,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 
 <nav class="cats" id="cats">
   <div class="cats-inner">
-    <button class="cat on" onclick="goTo('burgers',this)">🍔 Burgers</button>
+    <button class="cat on" onclick="goTo('brasas',this)">🔥 Combos a la Brasa</button>
+    <button class="cat" onclick="goTo('burgers',this)">🍔 Burgers</button>
     <button class="cat" onclick="goTo('perros',this)">🌭 Perros</button>
     <button class="cat" onclick="goTo('completos',this)">🥖 Completos</button>
     <button class="cat" onclick="goTo('arepas',this)">🫓 Arepas</button>
@@ -129,6 +130,88 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 </nav>
 
 <div style="max-width:500px;margin:0 auto">
+
+
+<!-- COMBOS A LA BRASA -->
+<div class="sec" id="brasas">
+  <div class="sec-title">🔥 Combos a la Brasa</div>
+  <div class="sec-sub">Pollos a la brasa · combos familiares y personales</div>
+
+  <div class="notice">
+    Combos sujetos a disponibilidad del día. Puedes pedir para retiro o delivery en Iquique.
+  </div>
+
+  <div class="grid">
+    <div class="card" onclick="add('Combo Clásico Brasa',22500,this)">
+      <span class="badge b-star">⭐ Familiar</span>
+      <div class="card-emoji">🍗</div>
+      <div class="card-body">
+        <div class="card-name">Combo Clásico Brasa</div>
+        <div class="card-desc">1 pollo a la brasa entero + papas fritas + ensalada + bebida 1.5 Lt.</div>
+        <div class="card-foot"><span class="card-price">$22.500</span><button class="add" onclick="event.stopPropagation();add('Combo Clásico Brasa',22500,this)">+</button></div>
+      </div>
+    </div>
+
+    <div class="card" onclick="add('Combo Especial Brasa',23500,this)">
+      <span class="badge b-promo">PROMO</span>
+      <div class="card-emoji">🍗</div>
+      <div class="card-body">
+        <div class="card-name">Combo Especial Brasa</div>
+        <div class="card-desc">1 pollo a la brasa entero + arroz chino + papas fritas + ensalada + bebida 1.5 Lt.</div>
+        <div class="card-foot"><span class="card-price">$23.500</span><button class="add" onclick="event.stopPropagation();add('Combo Especial Brasa',23500,this)">+</button></div>
+      </div>
+    </div>
+
+    <div class="card" onclick="add('Combo Full Familiar Brasa',27500,this)">
+      <span class="badge b-xl">FULL</span>
+      <div class="card-emoji">🍗</div>
+      <div class="card-body">
+        <div class="card-name">Combo Full Familiar Brasa</div>
+        <div class="card-desc">1 pollo a la brasa entero + papas fritas + ensalada + arroz chino + bebida 1.5 Lt.</div>
+        <div class="card-foot"><span class="card-price">$27.500</span><button class="add" onclick="event.stopPropagation();add('Combo Full Familiar Brasa',27500,this)">+</button></div>
+      </div>
+    </div>
+
+    <div class="card" onclick="add('1/2 Pollo Brasa',15500,this)">
+      <div class="card-emoji">🍗</div>
+      <div class="card-body">
+        <div class="card-name">1/2 Pollo Brasa</div>
+        <div class="card-desc">1/2 pollo a la brasa + papas fritas + ensalada</div>
+        <div class="card-foot"><span class="card-price">$15.500</span><button class="add" onclick="event.stopPropagation();add('1/2 Pollo Brasa',15500,this)">+</button></div>
+      </div>
+    </div>
+
+    <div class="card" onclick="add('1/2 Pollo Brasa Especial',16500,this)">
+      <span class="badge b-new">Especial</span>
+      <div class="card-emoji">🍗</div>
+      <div class="card-body">
+        <div class="card-name">1/2 Pollo Brasa Especial</div>
+        <div class="card-desc">1/2 pollo a la brasa + arroz chino + papas fritas + ensalada</div>
+        <div class="card-foot"><span class="card-price">$16.500</span><button class="add" onclick="event.stopPropagation();add('1/2 Pollo Brasa Especial',16500,this)">+</button></div>
+      </div>
+    </div>
+
+    <div class="card" onclick="add('Combo Personal Brasa',6000,this)">
+      <span class="badge b-new">Personal</span>
+      <div class="card-emoji">🍗</div>
+      <div class="card-body">
+        <div class="card-name">Combo Personal Brasa</div>
+        <div class="card-desc">1/4 pollo a la brasa + papas fritas + arroz chino + ensalada</div>
+        <div class="card-foot"><span class="card-price">$6.000</span><button class="add" onclick="event.stopPropagation();add('Combo Personal Brasa',6000,this)">+</button></div>
+      </div>
+    </div>
+
+    <div class="card" onclick="add('Combo Broaster Crunch',7000,this)">
+      <span class="badge b-promo">Crunch</span>
+      <div class="card-emoji">🍗</div>
+      <div class="card-body">
+        <div class="card-name">Combo Broaster Crunch</div>
+        <div class="card-desc">1/4 pollo broaster + papas fritas + arroz chino + ensalada</div>
+        <div class="card-foot"><span class="card-price">$7.000</span><button class="add" onclick="event.stopPropagation();add('Combo Broaster Crunch',7000,this)">+</button></div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- BURGERS -->
 <div class="sec" id="burgers">
@@ -721,7 +804,7 @@ function goTo(id,btn){
   if(btn)btn.classList.add('on');
 }
 
-const secs=['burgers','perros','completos','arepas','cachapas','arroz','pepitos','patacones','papas','empanadas','tequenos','pasapalos','churros','bebidas'];
+const secs=['brasas','burgers','perros','completos','arepas','cachapas','arroz','pepitos','patacones','papas','empanadas','tequenos','pasapalos','churros','bebidas'];
 window.addEventListener('scroll',()=>{
   const hdrH=document.querySelector('.hdr').offsetHeight;
   const catsH=document.querySelector('.cats').offsetHeight;
