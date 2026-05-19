@@ -696,13 +696,95 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 </div>
 
 
+
 <!-- PANADERÍA -->
 <div class="sec" id="panaderia">
   <div class="sec-title">🥖 Panadería</div>
-  <div class="sec-sub">Panadería La Felicitta · productos sujetos a disponibilidad</div>
+  <div class="sec-sub">Pan recién hecho todos los días</div>
+
   <div class="grid">
+    <div class="card" onclick="add('Completón',400,this)">
+      <div class="card-emoji">🥖</div>
+      <div class="card-body">
+        <div class="card-name">Completón</div>
+        <div class="card-desc">Pan para completón.</div>
+        <div class="card-foot"><span class="card-price">$400</span><button class="add" onclick="event.stopPropagation();add('Completón',400,this)">+</button></div>
+      </div>
+    </div>
+
+    <div class="card" onclick="add('Completo',320,this)">
+      <div class="card-emoji">🥖</div>
+      <div class="card-body">
+        <div class="card-name">Completo</div>
+        <div class="card-desc">Pan para completo.</div>
+        <div class="card-foot"><span class="card-price">$320</span><button class="add" onclick="event.stopPropagation();add('Completo',320,this)">+</button></div>
+      </div>
+    </div>
+
+    <div class="card" onclick="add('Hot Dog',250,this)">
+      <div class="card-emoji">🌭</div>
+      <div class="card-body">
+        <div class="card-name">Hot Dog</div>
+        <div class="card-desc">Pan hot dog clásico.</div>
+        <div class="card-foot"><span class="card-price">$250</span><button class="add" onclick="event.stopPropagation();add('Hot Dog',250,this)">+</button></div>
+      </div>
+    </div>
+
+    <div class="card" onclick="add('Perro Caliente',280,this)">
+      <div class="card-emoji">🌭</div>
+      <div class="card-body">
+        <div class="card-name">Perro Caliente</div>
+        <div class="card-desc">Pan para perro caliente.</div>
+        <div class="card-foot"><span class="card-price">$280</span><button class="add" onclick="event.stopPropagation();add('Perro Caliente',280,this)">+</button></div>
+      </div>
+    </div>
+
+    <div class="card" onclick="add('Churrasco Grande',660,this)">
+      <div class="card-emoji">🥖</div>
+      <div class="card-body">
+        <div class="card-name">Churrasco Grande</div>
+        <div class="card-desc">Pan para churrasco grande.</div>
+        <div class="card-foot"><span class="card-price">$660</span><button class="add" onclick="event.stopPropagation();add('Churrasco Grande',660,this)">+</button></div>
+      </div>
+    </div>
+
+    <div class="card" onclick="add('Churrasco Normal',400,this)">
+      <div class="card-emoji">🥖</div>
+      <div class="card-body">
+        <div class="card-name">Churrasco Normal</div>
+        <div class="card-desc">Pan para churrasco normal.</div>
+        <div class="card-foot"><span class="card-price">$400</span><button class="add" onclick="event.stopPropagation();add('Churrasco Normal',400,this)">+</button></div>
+      </div>
+    </div>
+
+    <div class="card" onclick="add('Churrasco Pequeño',350,this)">
+      <div class="card-emoji">🥖</div>
+      <div class="card-body">
+        <div class="card-name">Churrasco Pequeño</div>
+        <div class="card-desc">Pan para churrasco pequeño.</div>
+        <div class="card-foot"><span class="card-price">$350</span><button class="add" onclick="event.stopPropagation();add('Churrasco Pequeño',350,this)">+</button></div>
+      </div>
+    </div>
+
+    <div class="card" onclick="add('Hot Dog Brioche',400,this)">
+      <div class="card-emoji">🌭</div>
+      <div class="card-body">
+        <div class="card-name">Hot Dog Brioche</div>
+        <div class="card-desc">Pan brioche para hot dog.</div>
+        <div class="card-foot"><span class="card-price">$400</span><button class="add" onclick="event.stopPropagation();add('Hot Dog Brioche',400,this)">+</button></div>
+      </div>
+    </div>
+
+    <div class="card" onclick="add('Hamburguesa Brioche',400,this)">
+      <div class="card-emoji">🍔</div>
+      <div class="card-body">
+        <div class="card-name">Hamburguesa Brioche</div>
+        <div class="card-desc">Pan brioche para hamburguesa.</div>
+        <div class="card-foot"><span class="card-price">$400</span><button class="add" onclick="event.stopPropagation();add('Hamburguesa Brioche',400,this)">+</button></div>
+      </div>
+    </div>
+
     <div class="card" onclick="add('Pan de Pepito XL',800,this)">
-      <span class="badge b-new">Nuevo</span>
       <div class="card-emoji">🥖</div>
       <div class="card-body">
         <div class="card-name">Pan de Pepito XL</div>
@@ -721,7 +803,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
     </div>
 
     <div class="card" onclick="add('Pan de Guayaba',3000,this)">
-      <span class="badge b-star">Dulce</span>
       <div class="card-emoji">🥐</div>
       <div class="card-body">
         <div class="card-name">Pan de Guayaba</div>
@@ -735,8 +816,36 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 <!-- CHICHARRÓN -->
 <div class="sec" id="chicharron">
   <div class="sec-title">🐷 Chicharrón</div>
-  <div class="sec-sub">Consultar disponibilidad del día</div>
-  <div class="notice">Producto sujeto a disponibilidad. Consulta precio por WhatsApp.</div>
+  <div class="sec-sub">Pequeño · Mediano · Grande</div>
+
+  <div class="grid">
+    <div class="card" onclick="add('Chicharrón Pequeño',1000,this)">
+      <div class="card-emoji">🐷</div>
+      <div class="card-body">
+        <div class="card-name">Chicharrón Pequeño</div>
+        <div class="card-desc">Porción pequeña.</div>
+        <div class="card-foot"><span class="card-price">$1.000</span><button class="add" onclick="event.stopPropagation();add('Chicharrón Pequeño',1000,this)">+</button></div>
+      </div>
+    </div>
+
+    <div class="card" onclick="add('Chicharrón Mediano',2000,this)">
+      <div class="card-emoji">🐷</div>
+      <div class="card-body">
+        <div class="card-name">Chicharrón Mediano</div>
+        <div class="card-desc">Porción mediana.</div>
+        <div class="card-foot"><span class="card-price">$2.000</span><button class="add" onclick="event.stopPropagation();add('Chicharrón Mediano',2000,this)">+</button></div>
+      </div>
+    </div>
+
+    <div class="card" onclick="add('Chicharrón Grande',2500,this)">
+      <div class="card-emoji">🐷</div>
+      <div class="card-body">
+        <div class="card-name">Chicharrón Grande</div>
+        <div class="card-desc">Porción grande.</div>
+        <div class="card-foot"><span class="card-price">$2.500</span><button class="add" onclick="event.stopPropagation();add('Chicharrón Grande',2500,this)">+</button></div>
+      </div>
+    </div>
+  </div>
 </div>
 
 
