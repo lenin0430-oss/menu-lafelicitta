@@ -125,6 +125,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
     <button class="cat" onclick="goTo('tequenos',this)">🧀 Tequeños</button>
     <button class="cat" onclick="goTo('pasapalos',this)">🫙 Pasapalos</button>
     <button class="cat" onclick="goTo('churros',this)">🍩 Churros</button>
+    <button class="cat" onclick="goTo('panaderia',this)">🥖 Panadería</button>
+    <button class="cat" onclick="goTo('chicharron',this)">🐷 Chicharrón</button>
     <button class="cat" onclick="goTo('bebidas',this)">🥤 Bebidas</button>
   </div>
 </nav>
@@ -693,6 +695,51 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
   </div>
 </div>
 
+
+<!-- PANADERÍA -->
+<div class="sec" id="panaderia">
+  <div class="sec-title">🥖 Panadería</div>
+  <div class="sec-sub">Panadería La Felicitta · productos sujetos a disponibilidad</div>
+  <div class="grid">
+    <div class="card" onclick="add('Pan de Pepito XL',800,this)">
+      <span class="badge b-new">Nuevo</span>
+      <div class="card-emoji">🥖</div>
+      <div class="card-body">
+        <div class="card-name">Pan de Pepito XL</div>
+        <div class="card-desc">Pan especial para pepito XL.</div>
+        <div class="card-foot"><span class="card-price">$800</span><button class="add" onclick="event.stopPropagation();add('Pan de Pepito XL',800,this)">+</button></div>
+      </div>
+    </div>
+
+    <div class="card" onclick="add('Pan Piñita',2500,this)">
+      <div class="card-emoji">🍞</div>
+      <div class="card-body">
+        <div class="card-name">Pan Piñita</div>
+        <div class="card-desc">Pan fresco de la casa.</div>
+        <div class="card-foot"><span class="card-price">$2.500</span><button class="add" onclick="event.stopPropagation();add('Pan Piñita',2500,this)">+</button></div>
+      </div>
+    </div>
+
+    <div class="card" onclick="add('Pan de Guayaba',3000,this)">
+      <span class="badge b-star">Dulce</span>
+      <div class="card-emoji">🥐</div>
+      <div class="card-body">
+        <div class="card-name">Pan de Guayaba</div>
+        <div class="card-desc">Pan dulce con guayaba.</div>
+        <div class="card-foot"><span class="card-price">$3.000</span><button class="add" onclick="event.stopPropagation();add('Pan de Guayaba',3000,this)">+</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CHICHARRÓN -->
+<div class="sec" id="chicharron">
+  <div class="sec-title">🐷 Chicharrón</div>
+  <div class="sec-sub">Consultar disponibilidad del día</div>
+  <div class="notice">Producto sujeto a disponibilidad. Consulta precio por WhatsApp.</div>
+</div>
+
+
 <!-- BEBIDAS -->
 <div class="sec" id="bebidas">
   <div class="sec-title">🥤 Bebidas</div>
@@ -804,7 +851,7 @@ function goTo(id,btn){
   if(btn)btn.classList.add('on');
 }
 
-const secs=['brasas','burgers','perros','completos','arepas','cachapas','arroz','pepitos','patacones','papas','empanadas','tequenos','pasapalos','churros','bebidas'];
+const secs=['brasas','burgers','perros','completos','arepas','cachapas','arroz','pepitos','patacones','papas','empanadas','tequenos','pasapalos','churros','panaderia','chicharron','bebidas'];
 window.addEventListener('scroll',()=>{
   const hdrH=document.querySelector('.hdr').offsetHeight;
   const catsH=document.querySelector('.cats').offsetHeight;
