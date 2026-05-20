@@ -144,7 +144,17 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
   </div>
 
   <div class="grid">
-    <div class="card" onclick="add('Combo Clásico Brasa',22500,this)">
+    
+    <div class="card" onclick="add('1/4 Pollo a la Brasa',4000,this)">
+      <div class="card-emoji">🍗</div>
+      <div class="card-body">
+        <div class="card-name">1/4 Pollo a la Brasa</div>
+        <div class="card-desc">Pechuga o truto a elección</div>
+        <div class="card-foot"><span class="card-price">$4.000</span><button class="add" onclick="event.stopPropagation();add('1/4 Pollo a la Brasa',4000,this)">+</button></div>
+      </div>
+    </div>
+
+<div class="card" onclick="add('Combo Clásico Brasa',22500,this)">
       <span class="badge b-star">⭐ Familiar</span>
       <div class="card-emoji">🍗</div>
       <div class="card-body">
