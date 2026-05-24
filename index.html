@@ -219,62 +219,77 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
       </div>
     </div>
 
-    <div class="card" onclick="add('Personal Brasa 1',6500,this)">
-        <div>
-          <div class="card-title">Personal Brasa 1</div>
-          <div class="card-desc">1/4 pollo a la brasa + papas fritas</div>
-        </div>
-        <div class="card-foot"><span class="card-price">$6.500</span><button class="add" onclick="event.stopPropagation();add('Personal Brasa 1',6500,this)">+</button></div>
-      </div>
-
-      <div class="card" onclick="add('Personal Brasa 2',6500,this)">
-        <div>
-          <div class="card-title">Personal Brasa 2</div>
-          <div class="card-desc">1/4 pollo a la brasa + arroz chino o arroz blanco</div>
-        </div>
-        <div class="card-foot"><span class="card-price">$6.500</span><button class="add" onclick="event.stopPropagation();add('Personal Brasa 2',6500,this)">+</button></div>
-      </div>
-
-      <div class="card" onclick="add('Personal Brasa 3',6500,this)">
-        <div>
-          <div class="card-title">Personal Brasa 3</div>
-          <div class="card-desc">1/4 pollo a la brasa + ensalada</div>
-        </div>
-        <div class="card-foot"><span class="card-price">$6.500</span><button class="add" onclick="event.stopPropagation();add('Personal Brasa 3',6500,this)">+</button></div>
-      </div>
-
-      <div class="card" onclick="add('Personal Brasa 4',7000,this)">
-        <div>
-          <div class="card-title">Personal Brasa 4</div>
-          <div class="card-desc">1/4 pollo a la brasa + arroz chino o arroz blanco + ensalada</div>
-        </div>
-        <div class="card-foot"><span class="card-price">$7.000</span><button class="add" onclick="event.stopPropagation();add('Personal Brasa 4',7000,this)">+</button></div>
-      </div>
-
-      <div class="card" onclick="add('Personal Brasa 5',7000,this)">
-        <div>
-          <div class="card-title">Personal Brasa 5</div>
-          <div class="card-desc">1/4 pollo a la brasa + papas fritas + arroz chino o arroz blanco</div>
-        </div>
-        <div class="card-foot"><span class="card-price">$7.000</span><button class="add" onclick="event.stopPropagation();add('Personal Brasa 5',7000,this)">+</button></div>
-      </div>
-
-      <div class="card" onclick="add('Personal Brasa 6',7000,this)">
-        <div>
-          <div class="card-title">Personal Brasa 6</div>
-          <div class="card-desc">1/4 pollo a la brasa + papas fritas + ensalada</div>
-        </div>
-        <div class="card-foot"><span class="card-price">$7.000</span><button class="add" onclick="event.stopPropagation();add('Personal Brasa 6',7000,this)">+</button></div>
-      </div>
-
-      <div class="card" onclick="add('Personal Brasa 7',7500,this)">
-        <div>
-          <div class="card-title">Personal Brasa 7</div>
-          <div class="card-desc">1/4 pollo a la brasa + papas fritas + arroz chino o arroz blanco + ensalada</div>
-        </div>
-        <div class="card-foot"><span class="card-price">$7.500</span><button class="add" onclick="event.stopPropagation();add('Personal Brasa 7',7500,this)">+</button></div>
+    
+    <div class="card" onclick="add('Personal Brasa Papas',6500,this)">
+      <span class="badge b-new">Personal</span>
+      <div class="card-emoji">🍗</div>
+      <div class="card-body">
+        <div class="card-name">Personal Brasa Papas</div>
+        <div class="card-desc">1/4 pollo a la brasa + papas fritas.</div>
+        <div class="card-foot"><span class="card-price">$6.500</span><button class="add" onclick="event.stopPropagation();add('Personal Brasa Papas',6500,this)">+</button></div>
       </div>
     </div>
+
+    <div class="card" onclick="add('Personal Brasa Arroz',6500,this)">
+      <span class="badge b-new">Personal</span>
+      <div class="card-emoji">🍗</div>
+      <div class="card-body">
+        <div class="card-name">Personal Brasa Arroz</div>
+        <div class="card-desc">1/4 pollo a la brasa + arroz chino o arroz blanco.</div>
+        <div class="card-foot"><span class="card-price">$6.500</span><button class="add" onclick="event.stopPropagation();add('Personal Brasa Arroz',6500,this)">+</button></div>
+      </div>
+    </div>
+
+    <div class="card" onclick="add('Personal Brasa Ensalada',6500,this)">
+      <span class="badge b-new">Personal</span>
+      <div class="card-emoji">🍗</div>
+      <div class="card-body">
+        <div class="card-name">Personal Brasa Ensalada</div>
+        <div class="card-desc">1/4 pollo a la brasa + ensalada fresca.</div>
+        <div class="card-foot"><span class="card-price">$6.500</span><button class="add" onclick="event.stopPropagation();add('Personal Brasa Ensalada',6500,this)">+</button></div>
+      </div>
+    </div>
+
+    <div class="card" onclick="add('Personal Brasa Arroz Ensalada',7000,this)">
+      <span class="badge b-new">Completo</span>
+      <div class="card-emoji">🍗</div>
+      <div class="card-body">
+        <div class="card-name">Personal Brasa Arroz + Ensalada</div>
+        <div class="card-desc">1/4 pollo a la brasa + arroz chino o arroz blanco + ensalada.</div>
+        <div class="card-foot"><span class="card-price">$7.000</span><button class="add" onclick="event.stopPropagation();add('Personal Brasa Arroz Ensalada',7000,this)">+</button></div>
+      </div>
+    </div>
+
+    <div class="card" onclick="add('Personal Brasa Papas Arroz',7000,this)">
+      <span class="badge b-promo">Más pedido</span>
+      <div class="card-emoji">🍗</div>
+      <div class="card-body">
+        <div class="card-name">Personal Brasa Papas + Arroz</div>
+        <div class="card-desc">1/4 pollo a la brasa + papas fritas + arroz chino o arroz blanco.</div>
+        <div class="card-foot"><span class="card-price">$7.000</span><button class="add" onclick="event.stopPropagation();add('Personal Brasa Papas Arroz',7000,this)">+</button></div>
+      </div>
+    </div>
+
+    <div class="card" onclick="add('Personal Brasa Papas Ensalada',7000,this)">
+      <span class="badge b-new">Completo</span>
+      <div class="card-emoji">🍗</div>
+      <div class="card-body">
+        <div class="card-name">Personal Brasa Papas + Ensalada</div>
+        <div class="card-desc">1/4 pollo a la brasa + papas fritas + ensalada fresca.</div>
+        <div class="card-foot"><span class="card-price">$7.000</span><button class="add" onclick="event.stopPropagation();add('Personal Brasa Papas Ensalada',7000,this)">+</button></div>
+      </div>
+    </div>
+
+    <div class="card" onclick="add('Personal Brasa Full',7500,this)">
+      <span class="badge b-promo">Full</span>
+      <div class="card-emoji">🍗</div>
+      <div class="card-body">
+        <div class="card-name">Personal Brasa Full</div>
+        <div class="card-desc">1/4 pollo a la brasa + papas fritas + arroz chino o arroz blanco + ensalada.</div>
+        <div class="card-foot"><span class="card-price">$7.500</span><button class="add" onclick="event.stopPropagation();add('Personal Brasa Full',7500,this)">+</button></div>
+      </div>
+    </div>
+
 
     
     </div>
