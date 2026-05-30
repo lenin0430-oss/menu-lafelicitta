@@ -145,6 +145,59 @@ html,body{background:var(--bg);font-family:'Nunito',sans-serif;color:var(--text)
 .footer{padding:0.5rem 1rem 5rem;display:flex;gap:6px;flex-wrap:wrap}
 .footer-chip{font-size:10.5px;color:var(--muted);background:#fff;
   padding:3px 9px;border-radius:20px;border:1px solid var(--border)}
+
+
+/* OPTIMIZACIÓN MOBILE — no cambia el diseño, solo mejora legibilidad en celulares */
+@media (max-width:480px){
+  body{overflow-x:hidden}
+  .hero{padding:.85rem .85rem .75rem}
+  .logo-row{gap:10px;margin-bottom:7px}
+  .logo-img{width:60px;height:60px}
+  .brand-name{font-size:22px}
+  .brand-sub{font-size:10.5px}
+  .info-row{gap:4px;margin-top:7px}
+  .info-pill{font-size:10px;padding:3px 7px}
+  .nav-wrap{padding:0 6px}
+  .tab-btn{padding:10px 9px;font-size:11px}
+  .section-header{padding:.85rem .85rem .35rem}
+  .section-title{font-size:17px}
+  .section-note{margin:0 .85rem .65rem;padding:7px 10px;font-size:10.8px;line-height:1.35}
+  .content-area{padding:0 .85rem}
+  .items-grid{grid-template-columns:1fr;gap:8px;margin-bottom:8px}
+  .item-card{padding:10px;border-radius:13px}
+  .card-name{font-size:13.5px;line-height:1.22}
+  .card-name.lg{font-size:16px}
+  .card-desc,.card-items li{font-size:10.5px;line-height:1.35}
+  .price{font-size:17px}
+  .price.lg{font-size:20px}
+  .add-btn{width:30px;height:30px;font-size:18px}
+  .list-section{border-radius:13px;margin-bottom:8px}
+  .list-header{padding:8px 10px;font-size:13.5px;line-height:1.25}
+  .list-subheader{padding:6px 10px;font-size:10px;line-height:1.25}
+  .list-item{padding:9px 10px;gap:7px;align-items:flex-start}
+  .li-num{width:21px;height:21px;font-size:10px;margin-top:1px}
+  .li-name{font-size:12.2px;line-height:1.28}
+  .li-desc{display:block;font-size:10.2px;line-height:1.28;margin-top:2px}
+  .li-price{font-size:14px;line-height:1.2;margin-left:auto;white-space:nowrap}
+  .wa-bar{padding:10px 11px;gap:8px}
+  .wa-text,.wa-num{font-size:11.5px;line-height:1.25}
+  .footer{padding:.45rem .85rem 5rem;gap:5px}
+  .footer-chip{font-size:10px;line-height:1.25}
+  .cart-fab{right:10px;bottom:14px;padding:10px 14px;font-size:12.5px}
+}
+
+@media (max-width:360px){
+  .brand-name{font-size:20px}
+  .logo-img{width:56px;height:56px}
+  .tab-btn{font-size:10.5px;padding:9px 8px}
+  .section-title{font-size:16px}
+  .li-name{font-size:11.8px}
+  .li-desc{font-size:10px}
+  .li-price{font-size:13.5px}
+  .wa-bar{align-items:flex-start}
+  .wa-num{display:block}
+}
+
 </style>
 </head>
 <body>
