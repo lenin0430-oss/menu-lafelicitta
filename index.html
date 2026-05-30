@@ -304,8 +304,8 @@ html,body{background:var(--bg);font-family:'Nunito',sans-serif;color:var(--text)
   <div class="content-area">
     <div class="list-section">
       <div class="list-header">🥖 Completos</div>
-      <div class="list-item" onclick="add('As Normal',3500)"><span class="li-name">As — Normal</span><span class="li-price">$3.500</span></div>
-      <div class="list-item" onclick="add('As XL',6500)"><span class="li-badge badge-orange" style="background:#E67E22;color:#fff">XL</span><span class="li-name">As — XL</span><span class="li-price">$6.500</span></div>
+      <div class="list-item" onclick="add('As Normal',4990)"><span class="li-name">As — Normal</span><span class="li-price">$4.990</span></div>
+      <div class="list-item" onclick="add('As XL',8990)"><span class="li-badge badge-orange" style="background:#E67E22;color:#fff">XL</span><span class="li-name">As — XL</span><span class="li-price">$8.990</span></div>
       <div class="list-item" onclick="add('Italiano Normal',2500)"><span class="li-name">Italiano — Normal</span><span class="li-price">$2.500</span></div>
       <div class="list-item" onclick="add('Italiano XL',4500)"><span class="li-badge badge-orange" style="background:#E67E22;color:#fff">XL</span><span class="li-name">Italiano — XL</span><span class="li-price">$4.500</span></div>
     </div>
@@ -322,14 +322,38 @@ html,body{background:var(--bg);font-family:'Nunito',sans-serif;color:var(--text)
 
 <!-- ═══════════════════════════════ AREPAS ═══════════════════════════════ -->
 <div id="arepas" class="section-content">
-  <div class="section-header"><span class="section-icon">🫓</span><span class="section-title">Arepas Venezolanas</span><div class="section-line"></div></div>
-  <div class="section-note">Arma tu arepa con 5 ingredientes a tu gusto</div>
+  <div class="section-header"><span class="section-icon">🫓</span><span class="section-title">Nuestro Menú de Arepas 🇻🇪</span><div class="section-line"></div></div>
+  <div class="section-note">Arepas asadas o fritas a tu elección</div>
   <div class="content-area">
-    <div class="item-card wide" style="margin-bottom:9px">
-      <span class="card-emoji">🫓</span>
-      <div class="card-name lg">Arepa a tu gusto — 5 ingredientes</div>
-      <div class="card-desc">Carne mechada · pollo · salchicha · jamón · pernil · perico · caraotas · queso gouda · reina pepida · huevo frito · mariscos · tajadas · choclo · queso llanero</div>
-      <div class="price-row"><span class="price lg">$3.500</span><button class="add-btn" onclick="add('Arepa a tu gusto',3500)">+</button></div>
+    <div class="list-section">
+      <div class="list-header">🇻🇪 Arepas Clásicas</div>
+      <div class="list-item" onclick="add('Reina Pepiada',5990)"><div class="li-num">1</div><span class="li-name">REINA PEPIADA <span class="li-desc">· Pollo desmechado + palta cremosa + mayonesa casera</span></span><span class="li-price">$5.990</span></div>
+      <div class="list-item" onclick="add('Pelúa',5990)"><div class="li-num">2</div><span class="li-name">PELÚA <span class="li-desc">· Carne mechada de res + queso amarillo derretido</span></span><span class="li-price">$5.990</span></div>
+      <div class="list-item" onclick="add('Dominó',4990)"><div class="li-num">3</div><span class="li-name">DOMINÓ <span class="li-desc">· Caraotas negras + queso blanco rallado</span></span><span class="li-price">$4.990</span></div>
+      <div class="list-item" onclick="add('Perico',4990)"><div class="li-num">4</div><span class="li-name">PERICO <span class="li-desc">· Huevos revueltos + tomate + cebolla + pimentón + queso blanco</span></span><span class="li-price">$4.990</span></div>
+      <div class="list-item" onclick="add('Pabellón',6490)"><div class="li-num">5</div><span class="li-name">PABELLÓN <span class="li-desc">· Carne mechada + caraotas negras + plátano frito + queso blanco rallado</span></span><span class="li-price">$6.490</span></div>
+      <div class="list-item" onclick="add('Sifrina',5990)"><div class="li-num">6</div><span class="li-name">SIFRINA <span class="li-desc">· Pollo desmechado + palta + queso amarillo + mayonesa</span></span><span class="li-price">$5.990</span></div>
+      <div class="list-item" onclick="add('Tumbarrancho',7490)"><div class="li-num">7</div><span class="li-name">TUMBARRANCHO <span class="li-desc">· Carne mechada + jamón + queso amarillo + caraotas negras</span></span><span class="li-price">$7.490</span></div>
+      <div class="list-item" onclick="add('Rompe Colchón',8990)"><div class="li-num">8</div><span class="li-name">ROMPE COLCHÓN <span class="li-desc">· Camarones salteados + palta + queso blanco + pico de gallo</span></span><span class="li-price">$8.990</span></div>
+    </div>
+
+    <div class="list-section">
+      <div class="list-header">⭐ Arepas Especiales La Felicitta</div>
+      <div class="list-item" onclick="add('La Italiana',7990)"><div class="li-num">9</div><span class="li-name">LA ITALIANA <span class="li-desc">· Pernil desmechado + queso gouda derretido + pico de gallo + aguacate</span></span><span class="li-price">$7.990</span></div>
+      <div class="list-item" onclick="add('La Maracucha',6990)"><div class="li-num">10</div><span class="li-name">LA MARACUCHA <span class="li-desc">· Pernil + queso blanco + plátano frito</span></span><span class="li-price">$6.990</span></div>
+    </div>
+
+    <div class="list-section">
+      <div class="list-header">➕ Ingredientes Adicionales</div>
+      <div class="list-item" onclick="add('Aguacate / Palta',1200)"><span class="li-name">Aguacate / Palta</span><span class="li-price">$1.200</span></div>
+      <div class="list-item" onclick="add('Plátano frito',900)"><span class="li-name">Plátano frito</span><span class="li-price">$900</span></div>
+      <div class="list-item" onclick="add('Caraotas negras',900)"><span class="li-name">Caraotas negras</span><span class="li-price">$900</span></div>
+      <div class="list-item" onclick="add('Queso blanco rallado',900)"><span class="li-name">Queso blanco rallado</span><span class="li-price">$900</span></div>
+      <div class="list-item" onclick="add('Queso amarillo',1000)"><span class="li-name">Queso amarillo</span><span class="li-price">$1.000</span></div>
+      <div class="list-item" onclick="add('Queso gouda',1000)"><span class="li-name">Queso gouda</span><span class="li-price">$1.000</span></div>
+      <div class="list-item" onclick="add('Pico de gallo',800)"><span class="li-name">Pico de gallo</span><span class="li-price">$800</span></div>
+      <div class="list-item" onclick="add('Mayonesa casera',500)"><span class="li-name">Mayonesa casera</span><span class="li-price">$500</span></div>
+      <div class="list-item" onclick="add('Salsa casera ajo-cilantro',800)"><span class="li-name">Salsa casera ajo-cilantro</span><span class="li-price">$800</span></div>
     </div>
   </div>
 </div>
