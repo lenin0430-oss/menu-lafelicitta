@@ -223,6 +223,7 @@ html,body{background:var(--bg);font-family:'Nunito',sans-serif;color:var(--text)
 <div class="nav-outer">
   <div class="nav-wrap">
     <button class="tab-btn active" onclick="show('brasa',this)">🔥 Brasa</button>
+    <button class="tab-btn" onclick="show('almuerzos',this)">🍽️ Almuerzos</button>
     <button class="tab-btn" onclick="show('burgers',this)">🍔 Burgers</button>
     <button class="tab-btn" onclick="show('perros',this)">🌭 Perros</button>
     <button class="tab-btn" onclick="show('completos',this)">🥖 Completos</button>
@@ -306,6 +307,31 @@ html,body{background:var(--bg);font-family:'Nunito',sans-serif;color:var(--text)
       <div class="list-item" onclick="add('Personal 7 - ¼ Pollo + Papas + Arroz + Ensalada',7500)"><div class="li-num">7</div><span class="li-name">¼ Pollo + Papas fritas + Arroz chino o blanco + Ensalada</span><span class="li-price">$7.500</span></div>
     </div>
     </div>
+</div>
+
+
+<!-- ═══════════════════════════════ ALMUERZOS ═══════════════════════════════ -->
+<div id="almuerzos" class="section-content">
+  <div class="section-header"><span class="section-icon">🍽️</span><span class="section-title">Menú de Almuerzos</span><div class="section-line"></div></div>
+  <div class="section-note">🔥 Combos disponibles desde las 11:30 AM · Elige 1 proteína principal + 2 acompañamientos incluidos.</div>
+  <div class="content-area">
+    <div class="list-section">
+      <div class="list-header">🍗 Proteínas principales</div>
+      <div class="list-item" onclick="add('Almuerzo Pollo agridulce',6990)"><div class="li-num">1</div><span class="li-name">Pollo agridulce</span><span class="li-price">$6.990</span></div>
+      <div class="list-item" onclick="add('Almuerzo Chop suey de pollo',6990)"><div class="li-num">2</div><span class="li-name">Chop suey de pollo</span><span class="li-price">$6.990</span></div>
+      <div class="list-item" onclick="add('Almuerzo Pechuga Crispy al Estilo Chef',6990)"><div class="li-num">3</div><span class="li-name">Pechuga Crispy al Estilo Chef</span><span class="li-price">$6.990</span></div>
+      <div class="list-item" onclick="add('Almuerzo Pollo a la brasa',7500)"><div class="li-num">4</div><span class="li-name">Pollo a la brasa</span><span class="li-price">$7.500</span></div>
+      <div class="list-item" onclick="add('Almuerzo Costillas chinas agridulce',7990)"><div class="li-num">5</div><span class="li-name">Costillas chinas agridulce</span><span class="li-price">$7.990</span></div>
+    </div>
+
+    <div class="list-section">
+      <div class="list-header">🍚 Acompañamientos incluidos — elige 2</div>
+      <div class="list-subheader">Cada almuerzo incluye 2 acompañamientos a elección</div>
+      <div class="list-item"><div class="li-num">1</div><span class="li-name">Arroz chino o fideos salteados</span></div>
+      <div class="list-item"><div class="li-num">2</div><span class="li-name">Ensalada mixta o ensalada rallada</span></div>
+      <div class="list-item"><div class="li-num">3</div><span class="li-name">Papas fritas naturales</span></div>
+    </div>
+  </div>
 </div>
 
 <!-- ═══════════════════════════════ BURGERS ═══════════════════════════════ -->
