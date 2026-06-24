@@ -222,7 +222,8 @@ html,body{background:var(--bg);font-family:'Nunito',sans-serif;color:var(--text)
 <!-- NAV -->
 <div class="nav-outer">
   <div class="nav-wrap">
-    <button class="tab-btn active" onclick="show('brasa',this)">🔥 Brasa</button>
+        <button class="tab-btn" onclick="show('promos',this)" style="color:#C0392B;font-weight:900;">🔥 Promos</button>
+<button class="tab-btn active" onclick="show('brasa',this)">🔥 Brasa</button>
     <button class="tab-btn" onclick="show('almuerzos',this)">🍽️ Almuerzos</button>
     <button class="tab-btn" onclick="show('burgers',this)">🍔 Burgers</button>
     <button class="tab-btn" onclick="show('perros',this)">🌭 Perros</button>
@@ -241,6 +242,57 @@ html,body{background:var(--bg);font-family:'Nunito',sans-serif;color:var(--text)
     <button class="tab-btn" onclick="show('chicharron',this)">🐷 Chicharrón</button>
     <button class="tab-btn" onclick="show('bebidas',this)">🥤 Bebidas</button>
     <button class="tab-btn" onclick="show('extras',this)">🛍️ Extras</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ PROMOS ═══════════════════════════════ -->
+<div id="promos" class="section-content">
+  <div class="section-header"><span class="section-icon">🔥</span><span class="section-title">Promos Activas</span><div class="section-line"></div></div>
+  <div class="content-area">
+
+    <div class="items-grid">
+
+      <div class="item-card wide" style="border:2px solid var(--red);background:#FFF8F0;">
+        <div class="hot-badge" style="background:#8E44AD;">⏰ 5PM–7PM</div>
+        <span class="card-badge badge-red">HAPPY HOUR</span>
+        <div class="card-name lg">🧀 Happy Hour Tequeños</div>
+        <div class="card-desc">12 tequeños 8cm por solo $5.900. Todos los días de 5PM a 7PM. ¡Ahorra $1.000!</div>
+        <div class="price-row">
+          <div>
+            <span class="price lg">$5.900</span>
+            <span style="font-size:12px;color:var(--muted);text-decoration:line-through;margin-left:8px;">$6.900</span>
+          </div>
+          <button class="add-btn" onclick="add('Happy Hour - 12 Tequeños',5900)">+</button>
+        </div>
+      </div>
+
+      <div class="item-card" style="border:2px solid var(--red);background:#FFF8F0;">
+        <span class="card-badge badge-red">MIÉRCOLES</span>
+        <div class="card-name">🌭 Miércoles del Perro</div>
+        <div class="card-desc">El Perro Callejero 20cm a precio especial. Solo los miércoles.</div>
+        <div class="price-row">
+          <div>
+            <span class="price">$1.990</span>
+            <span style="font-size:11px;color:var(--muted);text-decoration:line-through;margin-left:6px;">$2.500</span>
+          </div>
+          <button class="add-btn" onclick="add('Miércoles del Perro - Callejero',1990)">+</button>
+        </div>
+      </div>
+
+      <div class="item-card" style="border:2px solid var(--red);background:#FFF8F0;">
+        <span class="card-badge badge-green">COMBO</span>
+        <div class="card-name">🍔 Combo Estudiante</div>
+        <div class="card-desc">Burger La Felicitta + Papas Normal + KR. Todo incluido, ahorra $500.</div>
+        <div class="price-row">
+          <div>
+            <span class="price">$8.500</span>
+            <span style="font-size:11px;color:var(--muted);text-decoration:line-through;margin-left:6px;">$9.000</span>
+          </div>
+          <button class="add-btn" onclick="add('Combo Estudiante - Burger+Papas+KR',8500)">+</button>
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>
 
